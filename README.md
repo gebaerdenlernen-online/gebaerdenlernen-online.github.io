@@ -1,10 +1,12 @@
 # Gebärden Lernen Online
 
-Dieses Projekt ist ein eine erste Test Anwendung um die Inhalte von https://gebaerdenlernen.de/ zu trainieren und um leicht neue Inhalte hinzufügen zu können. 
+Dieses Projekt ist ein eine erste Test Anwendung um die Inhalte von [https://gebaerdenlernen.de/](https://gebaerdenlernen.de/) zu trainieren und um leicht neue Inhalte hinzufügen zu können. 
 
-Noch ist das Projekt nicht offiziell mit der Webseite verknüpft, jedoch wird viel von dem Inhalt von https://gebaerdenlernen.de/ welche die Videos und Texte unter der Lizenz [CC BY-NC-SA 3.0 DE](https://creativecommons.org/licenses/by-nc-sa/3.0/de/) veröffentlicht. 
+Noch ist das Projekt nicht offiziell mit der Webseite verknüpft, jedoch wird viel von dem Inhalt von [https://gebaerdenlernen.de/](https://gebaerdenlernen.de/) welche die Videos und Texte unter der Lizenz [CC BY-NC-SA 3.0 DE](https://creativecommons.org/licenses/by-nc-sa/3.0/de/) veröffentlicht. 
 
 ## Wie benutze ich die Anwendung?
+
+Die erste Demo findet ihr [hier](https://gebaerdenlernen-online.github.io/).
 
 ## Wie kann ich helfen?
 Erstellt ein Issue auf GitHub mit Anregungen oder Wünschen für die Anwendung. Später werde ich noch Möglichkeiten beschreiben wie du selbst Inhalte und neue Lernformate beisteuern kannst. 
@@ -18,4 +20,12 @@ Alle Inhalte müssen unter [CC BY-NC-SA 3.0 DE](https://creativecommons.org/lice
 
 ## Warum dieses Projekt?
 
+> Die meisten Materialien online fand sahen sehr alt aus oder waren Kostenpflichtig. Wir haben vor kurzem erfahren das unser Sohn (9 Monate) nicht hören kann und damit keine Zeit vergeht bis wir einen Hausgeärdensprachkurs bekommen können, besonders unter Corona Bedingungen habe ich angefangen für uns diese kleinen Anwendung zu bauen.
+> Außerdem möchte ich, dass möglichst viele Menschen einfach zu dem Projekt beitragen können.
+> - Tim (03.04.2021)
+
 ## Danksagungen
+
+Ein großes Danke an:
+
+- Die Erschaffer von [https://gebaerdenlernen.de/](https://gebaerdenlernen.de/) für die vielen freien Materialien.
