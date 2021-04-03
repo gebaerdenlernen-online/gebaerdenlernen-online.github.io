@@ -63,3 +63,18 @@ if(user_data === null){
 } else {
     user_data = JSON.parse(user_data);
 }
+
+document.getElementById("sign_count").innerText = dict.dict.length;
+
+// Define useful functions:
+
+function searchInDict(word){
+    for(var i = 0; i<dict.dict.length; i++){
+        if(dict.dict[i].word.de === word){
+            return dict.dict[i]
+        }
+        if(dict.dict[i].word.en === word){
+            return dict.dict[i]
+        }
+    }
+}
