@@ -43,9 +43,15 @@
       <!-- Dictonary -->
         <h1>Wörterbuch</h1>
         <p>Anzahl an Gebärden: <span id="sign_count">0</span></p>
-        <div class="form-inline">
-            <input id="search_input" class="form-control mr-sm-2" placeholder="Suche" aria-label="Search">
+        <div class="row">
+            <div class="col-9">
+                <input id="search_input" class="form-control mr-sm-2" placeholder="Suche" aria-label="Search">
+            </div>
+            <div class="col-1">
+                <button id="search" class="btn btn-outline-success"><i class="fas fa-search"></i></button>
+            </div>
         </div>
+        <br>
         <div id="search_result">
 
         </div>

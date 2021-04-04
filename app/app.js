@@ -65,7 +65,7 @@ if(user_data === null){
 }
 
 document.getElementById('sign_count').innerText = dict.dict.length;
-document.getElementById('search_input').addEventListener("keyup", function(data){
+document.getElementById('search').addEventListener("click", function(data){
     word = document.getElementById("search_input").value
     showSearchResult("search_result", word)
 });
@@ -95,7 +95,7 @@ function searchInDict(word){
 
 function searchResultHTML(word, obj){
     console.log("Obj:",obj)
-    html = "<p>Suche nach \""+encodeHTMLEntities(word)+"\".</p><hl>"
+    html = "<p>Suche nach \""+encodeHTMLEntities(word)+"\".</p><hr>"
     tmp = html;
     
     for(var i = 0; i<obj.length; i++){
