@@ -70,10 +70,19 @@ document.getElementById('search').addEventListener("click", function(data){
     showSearchResult("search_result", word)
 });
 
-// Define useful functions:
+// Word search
 
 function searchInDict(word){
+    console.log("Search Word:",word)
     result = [];
+    single_search = false;
+    if(word.startsWith('"') && word.endsWith('"')){
+        single_search = true
+        word = word.replaceAll('"', '');
+    }
+
+    console.log("Single Search:",word)
+
     for(var i = 0; i<dict.dict.length; i++){
         if(dict.dict[i].word.de.toLowerCase() === word.toLowerCase()){
             result.push(dict.dict[i])
@@ -83,7 +92,7 @@ function searchInDict(word){
         //     result.push(dict.dict[i])
         //     continue
         // }
-        if(dict.dict[i].word.de.toLowerCase().match(".*?"+word.toLowerCase()+".*?") !== null){
+        if(dict.dict[i].word.de.toLowerCase().match(".*?"+word.toLowerCase()+".*?") !== null && !single_search){
             result.push(dict.dict[i])
         }
         // if(dict.dict[i].word.en.toLowerCase().match(".*?"+word.toLowerCase()+".*?") !== null){
@@ -128,6 +137,36 @@ function showSearchResult(id,word){
     html = searchResultHTML(word,obj)
     element.innerHTML = html
 }
+
+// Learn new vocabulary
+
+function addToData(obj, num){
+    if(num>0 && num <6){
+        user_data.data[num].push(obj)
+    }
+}
+
+function init(){
+    if(user_data.data.length === 0){
+        addToData(searchInDict('"Vogel"'));
+        addToData(searchInDict('"Baum"'));
+        addToData(searchInDict('"Hund"'));
+        addToData(searchInDict('"Katze"'));
+        addToData(searchInDict('"Lampe"'));
+        addToData(searchInDict('"Fenster"'));
+        addToData(searchInDict('"Papa"'));
+        addToData(searchInDict('"Mama"'));
+        addToData(searchInDict('"Oma"'));
+        addToData(searchInDict('"Opa"'));
+        addToData(searchInDict('"Pipi"'));
+        addToData(searchInDict('"Klo"'));
+        addToData(searchInDict('"Küche"'));
+        addToData(searchInDict('"Ich"'));
+        addToData(searchInDict('"Du"'));
+    }
+}
+
+// Useful functions
 
 function encodeHTMLEntities(string){
     console.log("String:", string)
