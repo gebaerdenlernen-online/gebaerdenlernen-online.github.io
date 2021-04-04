@@ -56,6 +56,8 @@ if(user_data === null){
            // Typical action to be performed when the document is ready:
            user_data = JSON.parse(xhr4.responseText);
            localStorage.setItem('user_data', xhr4.responseText);
+
+           init()
         }
     };
     xhr4.open('GET', '/app/data/user_data.json', true);
@@ -64,11 +66,24 @@ if(user_data === null){
     user_data = JSON.parse(user_data);
 }
 
-document.getElementById('sign_count').innerText = dict.dict.length;
-document.getElementById('search').addEventListener("click", function(data){
-    word = document.getElementById("search_input").value
-    showSearchResult("search_result", word)
-});
+if(document.getElementById("sign_count") !== null){
+    document.getElementById('sign_count').innerText = dict.dict.length;
+}
+
+if(document.getElementById('search') !== null){
+    document.getElementById('search').addEventListener("click", function(data){
+        word = document.getElementById("search_input").value
+        showSearchResult("search_result", word)
+    });
+}
+
+if(document.getElementById("btn-fach-1") !== null){
+    document.getElementById("btn-fach-1").addEventListener("click", function(){
+        vs = getPracticeSet(0);
+        showPracticeHTML(vs,0)
+    });
+}
+
 
 // Word search
 
@@ -84,20 +99,27 @@ function searchInDict(word){
     console.log("Single Search:",word)
 
     for(var i = 0; i<dict.dict.length; i++){
-        if(dict.dict[i].word.de.toLowerCase() === word.toLowerCase()){
-            result.push(dict.dict[i])
-            continue
+        if(single_search){
+            if(dict.dict[i].word.de.toLowerCase() === word.toLowerCase()){
+                result = dict.dict[i]
+                break
+            }
+        } else {
+            if(dict.dict[i].word.de.toLowerCase() === word.toLowerCase()){
+                result.push(dict.dict[i])
+                continue
+            }
+            // if(dict.dict[i].word.en.toLowerCase() === word.toLowerCase()){
+            //     result.push(dict.dict[i])
+            //     continue
+            // }
+            if(dict.dict[i].word.de.toLowerCase().match(".*?"+word.toLowerCase()+".*?") !== null){
+                result.push(dict.dict[i])
+            }
+            // if(dict.dict[i].word.en.toLowerCase().match(".*?"+word.toLowerCase()+".*?") !== null){
+            //     result.push(dict.dict[i].word.en)
+            // }
         }
-        // if(dict.dict[i].word.en.toLowerCase() === word.toLowerCase()){
-        //     result.push(dict.dict[i])
-        //     continue
-        // }
-        if(dict.dict[i].word.de.toLowerCase().match(".*?"+word.toLowerCase()+".*?") !== null && !single_search){
-            result.push(dict.dict[i])
-        }
-        // if(dict.dict[i].word.en.toLowerCase().match(".*?"+word.toLowerCase()+".*?") !== null){
-        //     result.push(dict.dict[i].word.en)
-        // }
     }
     return result;
 }
@@ -141,28 +163,87 @@ function showSearchResult(id,word){
 // Learn new vocabulary
 
 function addToData(obj, num){
-    if(num>0 && num <6){
+    if(num >= 0 && num < 6){
         user_data.data[num].push(obj)
     }
 }
 
 function init(){
-    if(user_data.data.length === 0){
-        addToData(searchInDict('"Vogel"'));
-        addToData(searchInDict('"Baum"'));
-        addToData(searchInDict('"Hund"'));
-        addToData(searchInDict('"Katze"'));
-        addToData(searchInDict('"Lampe"'));
-        addToData(searchInDict('"Fenster"'));
-        addToData(searchInDict('"Papa"'));
-        addToData(searchInDict('"Mama"'));
-        addToData(searchInDict('"Oma"'));
-        addToData(searchInDict('"Opa"'));
-        addToData(searchInDict('"Pipi"'));
-        addToData(searchInDict('"Klo"'));
-        addToData(searchInDict('"Küche"'));
-        addToData(searchInDict('"Ich"'));
-        addToData(searchInDict('"Du"'));
+    if(user_data.data[0].length === 0){
+        addToData(searchInDict('"Vogel"'),0);
+        addToData(searchInDict('"Baum"'),0);
+        addToData(searchInDict('"Hund"'),0);
+        addToData(searchInDict('"Katze"'),0);
+        addToData(searchInDict('"Lampe"'),0);
+        addToData(searchInDict('"Papa"'),0);
+        addToData(searchInDict('"Mama"'),0);
+        addToData(searchInDict('"Oma"'),0);
+        addToData(searchInDict('"Opa"'),0);
+        addToData(searchInDict('"Ich"'),0);
+        addToData(searchInDict('"Du"'),0);
+
+        localStorage.setItem("user_data", JSON.stringify(user_data))
+    }
+}
+
+function getPracticeSet(num){
+    count = settings.number_of_words_per_session
+    vocabulary_set = []
+
+    for(var i = 0; i < count; i++){
+        if(user_data.data[num] !== undefined){
+            v = user_data.data[num].pop();
+            console.log(i,v)
+            vocabulary_set.push(v)
+        }
+    }
+
+    return vocabulary_set;
+}
+
+function createPracticeHTML(vocabulary_set, i){
+    html = `<div class="card text-center">
+        <div class="card-header">
+            <h4>ÜBEN</h4>
+        </div>
+        <div class="card-img-top embed-responsive embed-responsive-4by3">
+            <video class="embed-responsive-item" autoplay muted loop>
+                <source src="`+encodeURI(vocabulary_set[i].video.dgs[0].url)+`" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            
+        </div>
+        <!-- YouTube -->
+        <!-- <div class="card-img-top embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+        </div> -->
+        <div class="card-body">
+        <button class="btn btn-info"  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
+        <div class="collapse" id="collapseExample">
+            <br>
+            <h5 class="card-title" id="word">`+encodeHTMLEntities(vocabulary_set[i].word.de)+`</h5>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <a href="#true" class="btn btn-outline-success"><i class="fas fa-check"></i></a>
+                </div>
+                <div class="col">
+                    <a href="#false"class="btn btn-outline-danger"><i class="fas fa-times"></i></a>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="card-footer text-muted">
+        `+(i+1)+`/`+vocabulary_set.length+`
+        </div>
+        </div>`;
+
+    return html;
+}
+
+function showPracticeHTML(vs,num){
+    if(document.getElementById("practice") !== null){
+        document.getElementById("practice").innerHTML = createPracticeHTML(vs,num)
     }
 }
 
@@ -178,3 +259,7 @@ function encodeHTMLEntities(string){
     }
     return "undefined";
 }
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
