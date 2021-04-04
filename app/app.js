@@ -65,7 +65,7 @@ if(user_data === null){
 }
 
 document.getElementById('sign_count').innerText = dict.dict.length;
-document.getElementById('search').addEventListener("click", function(data){
+document.getElementById('search_input').addEventListener("keyup", function(data){
     word = document.getElementById("search_input").value
     showSearchResult("search_result", word)
 });
@@ -73,35 +73,69 @@ document.getElementById('search').addEventListener("click", function(data){
 // Define useful functions:
 
 function searchInDict(word){
+    result = [];
     for(var i = 0; i<dict.dict.length; i++){
-        if(dict.dict[i].word.de === word){
-            return dict.dict[i]
+        if(dict.dict[i].word.de.toLowerCase() === word.toLowerCase()){
+            result.push(dict.dict[i])
+            continue
         }
-        if(dict.dict[i].word.en === word){
-            return dict.dict[i]
+        // if(dict.dict[i].word.en.toLowerCase() === word.toLowerCase()){
+        //     result.push(dict.dict[i])
+        //     continue
+        // }
+        if(dict.dict[i].word.de.toLowerCase().match(".*?"+word.toLowerCase()+".*?") !== null){
+            result.push(dict.dict[i])
         }
+        // if(dict.dict[i].word.en.toLowerCase().match(".*?"+word.toLowerCase()+".*?") !== null){
+        //     result.push(dict.dict[i].word.en)
+        // }
     }
+    return result;
 }
 
-function searchResultHTML(obj){
+function searchResultHTML(word, obj){
     console.log("Obj:",obj)
-    html = `<div class="card text-center">
-    <div class="card-header">
-        `+obj.word.de+`
-    </div>
-    <div class="card-img-top embed-responsive embed-responsive-4by3">
-        <video class="embed-responsive-item" autoplay muted loop>
-            <source src="`+obj.video.dgs[0].url+`" type="video/mp4">
-            Your browser does not support the video tag.
-        </video> 
-    </div>
-    </div>`;
+    html = "<p>Suche nach \""+encodeHTMLEntities(word)+"\".</p><hl>"
+    tmp = html;
+    
+    for(var i = 0; i<obj.length; i++){
+        if(i==10){
+            html += "<p> 10 von "+obj.length+" Ergebnissen angezeigt, bitte genauer suchen."
+            break;
+        }
+        html += `<div class="card text-center">
+        <div class="card-header">
+            <h4>`+encodeHTMLEntities(obj[i].word.de)+`</h4>
+        </div>
+        <div class="card-img-top embed-responsive embed-responsive-4by3">
+            <video class="embed-responsive-item" autoplay muted loop>
+                <source src="`+encodeURI(obj[i].video.dgs[0].url)+`" type="video/mp4">
+                Your browser does not support the video tag.
+            </video> 
+        </div>
+        </div>
+        <br>`;
+    }
+    if(html === tmp){
+        html += "<p>Kein Ergebnis gefunden.</p>"
+    }
     return html;
 }
 
 function showSearchResult(id,word){
     element = document.getElementById(id);
     obj = searchInDict(word)
-    html = searchResultHTML(obj)
+    html = searchResultHTML(word,obj)
     element.innerHTML = html
+}
+
+function encodeHTMLEntities(string){
+    console.log("String:", string)
+    if(string !== undefined){
+        return string.replace(/./gm, function(s) {
+            // return "&#" + s.charCodeAt(0) + ";";
+            return (s.match(/[a-z0-9\s]+/i)) ? s : "&#" + s.charCodeAt(0) + ";";
+        })
+    }
+    return "undefined";
 }
