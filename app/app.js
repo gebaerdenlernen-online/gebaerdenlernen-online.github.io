@@ -90,35 +90,16 @@ if(document.getElementById("btn-fach-1") !== null){
 function searchInDict(word){
     console.log("Search Word:",word)
     result = [];
-    single_search = false;
-    if(word.startsWith('"') && word.endsWith('"')){
-        single_search = true
-        word = word.replaceAll('"', '');
-    }
-
-    console.log("Single Search:",word)
 
     for(var i = 0; i<dict.dict.length; i++){
-        if(single_search){
-            if(dict.dict[i].word.de.toLowerCase() === word.toLowerCase()){
-                result = dict.dict[i]
-                break
-            }
-        } else {
-            if(dict.dict[i].word.de.toLowerCase() === word.toLowerCase()){
-                result.push(dict.dict[i])
-                continue
-            }
-            // if(dict.dict[i].word.en.toLowerCase() === word.toLowerCase()){
-            //     result.push(dict.dict[i])
-            //     continue
-            // }
-            if(dict.dict[i].word.de.toLowerCase().match(".*?"+word.toLowerCase()+".*?") !== null){
-                result.push(dict.dict[i])
-            }
-            // if(dict.dict[i].word.en.toLowerCase().match(".*?"+word.toLowerCase()+".*?") !== null){
-            //     result.push(dict.dict[i].word.en)
-            // }
+        if(dict.dict[i].word.de.toLowerCase() === word.toLowerCase()){
+            result.push(dict.dict[i])
+            break;
+        }
+    }
+    for(var i = 0; i<dict.dict.length; i++){
+        if(dict.dict[i].word.de.toLowerCase().match(".*?"+word.toLowerCase()+".*?") !== null){
+            result.push(dict.dict[i])
         }
     }
     return result;
@@ -129,23 +110,42 @@ function searchResultHTML(word, obj){
     html = "<p>Suche nach \""+encodeHTMLEntities(word)+"\".</p><hr>"
     tmp = html;
     
-    for(var i = 0; i<obj.length; i++){
-        if(i==10){
-            html += "<p> 10 von "+obj.length+" Ergebnissen angezeigt, bitte genauer suchen."
-            break;
+    if(obj.length > 0){
+        html += `
+            <br>
+            <div class="card text-center">
+            <div class="card-header">
+                <h4>`+encodeHTMLEntities(obj[0].word.de)+`</h4>
+            </div>
+            <div class="card-img-top embed-responsive embed-responsive-4by3">
+                <video class="embed-responsive-item" autoplay muted loop>
+                    <source src="`+encodeURI(obj[0].video.dgs[0].url)+`" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video> 
+            </div>
+            </div>
+            <br>
+            <hr>
+            <h4>Ähnliche Worte</h4>
+            <br>`;
+        for(var i = 1; i<obj.length; i++){
+            if(i==10){
+                html += "<p> 10 von "+obj.length+" Ergebnissen angezeigt, bitte genauer suchen."
+                break;
+            }
+            html += `<div class="card text-center">
+            <div class="card-header" data-toggle="collapse" data-target="#video-`+i+`" aria-expanded="false" aria-controls="video-`+i+`">
+                <h4>`+encodeHTMLEntities(obj[i].word.de)+`</h4>
+            </div>
+            <div class="card-img-top embed-responsive embed-responsive-4by3 collapse" id="video-`+i+`">
+                <video class="embed-responsive-item" autoplay muted loop>
+                    <source src="`+encodeURI(obj[i].video.dgs[0].url)+`" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video> 
+            </div>
+            </div>
+            <br>`;
         }
-        html += `<div class="card text-center">
-        <div class="card-header">
-            <h4>`+encodeHTMLEntities(obj[i].word.de)+`</h4>
-        </div>
-        <div class="card-img-top embed-responsive embed-responsive-4by3">
-            <video class="embed-responsive-item" autoplay muted loop>
-                <source src="`+encodeURI(obj[i].video.dgs[0].url)+`" type="video/mp4">
-                Your browser does not support the video tag.
-            </video> 
-        </div>
-        </div>
-        <br>`;
     }
     if(html === tmp){
         html += "<p>Kein Ergebnis gefunden.</p>"
