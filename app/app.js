@@ -96,6 +96,19 @@ if (document.getElementById("btn-fach-1") !== null) {
 
 // Word search
 
+function searchInDictForCategory(cat){
+    result = []
+    for (var i = 0; i < dict.dict.length; i++) {
+        for(var j = 0; j < dict.dict[i].category.length; j++){
+            if (dict.dict[i].category[j].toLowerCase() === cat.toLowerCase()) {
+                result.push(dict.dict[i])
+                break;
+            }
+        }
+    }
+    return result
+}
+
 function searchInDict(word, isExactMatch) {
     console.log("Search Word:", word)
     result = [];
@@ -218,7 +231,9 @@ function showSearchResult(id, word) {
 
 function addToData(obj, num) {
     if (num >= 0 && num < 6) {
-        user_data.data[num].push(obj[0])
+        for(var i = 0; i<obj.length; i++){
+            user_data.data[num].push(obj[i])
+        }
     }
 }
 

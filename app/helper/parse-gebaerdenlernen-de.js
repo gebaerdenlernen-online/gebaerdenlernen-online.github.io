@@ -84,3 +84,19 @@ for(var i = 0; i<tables.length; i++){
     }
 }
 console.log(obj);
+
+//Extract all categories
+var obj = [];
+
+var tables = document.getElementsByTagName("table");
+for(var i = 0; i<tables.length; i++){
+    console.log("Tables:",i,tables[i])
+    var rows = tables[i].children[0].children;
+    for(var j = 0; j < rows.length; j++){
+        var cat = rows[j].children[1].innerText
+        obj.push(cat);
+    }
+}
+console.log(obj.filter(function(value, index, self) {
+    return self.indexOf(value) === index;
+  }));
