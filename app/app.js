@@ -126,7 +126,7 @@ function searchResultHTML(word, obj){
             </div>
             <br>
             <hr>
-            <h4>Ähnliche Worte</h4>
+            <h4>Worte die den Suchbergiff enthalten:</h4>
             <br>`;
         for(var i = 1; i<obj.length; i++){
             if(i==10){
