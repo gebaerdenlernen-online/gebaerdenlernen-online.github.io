@@ -1,5 +1,5 @@
 // Delete in production
-localStorage.removeItem('dict')
+//localStorage.removeItem('dict')
 localStorage.removeItem('meta')
 localStorage.removeItem('settings')
 localStorage.removeItem('user_data')
@@ -22,7 +22,7 @@ if (dict === null) {
             }
         }
     };
-    xhr1.open('GET', '/app/data/dict.json', true);
+    xhr1.open('GET', '/app/data/dict-v2.json', true);
     xhr1.send();
 } else {
     dict = JSON.parse(dict);
@@ -125,6 +125,14 @@ function searchResultHTML(word, obj) {
     tmp = html;
 
     if (obj.length > 0) {
+        categories = ""
+        for(var k=0;k<obj[0].category.length;k++){
+            categories += obj[0].category[k]
+            if(k !== obj[0].category.length-1){
+                categories += ", "
+            }
+        }
+
         html += `
             <h4>Bestes Ergebnis:</h4>
             <br>
@@ -144,7 +152,8 @@ function searchResultHTML(word, obj) {
                 <div class="collapse text-left" id="info-0">
                     <b>Quelle:</b> ` + obj[0].video.dgs[0].source + `<br>
                     <b>Datum:</b> ` + obj[0].video.dgs[0].created + `<br>
-                    <b>Lizenz:</b> <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/de/">CC BY-NC-SA 3.0 DE</a>
+                    <b>Kategorie:</b> ` + categories + `<br>
+                    <b>Lizenz:</b> <a href="` + obj[0].video.dgs[0].license.url + `">` + obj[0].video.dgs[0].license.name + `</a>
                 </div>
             </div>
             </div>
@@ -159,6 +168,14 @@ function searchResultHTML(word, obj) {
                 html += "<p> 5 von " + obj.length + " Ergebnissen angezeigt, bitte genauer suchen."
                 break;
             }
+            categories = ""
+            for(var k=0;k<obj[0].category.length;k++){
+                categories += obj[0].category[k]
+                if(k !== obj[0].category.length-1){
+                    categories += ", "
+                }
+            }
+
             html += `<div class="card text-center">
             <div class="card-header" data-toggle="collapse" data-target="#video-` + i + `" aria-expanded="false" aria-controls="video-` + i + `">
                 <h4>` + encodeHTMLEntities(obj[i].word.de) + `</h4>
@@ -175,7 +192,8 @@ function searchResultHTML(word, obj) {
                 <div class="collapse text-left" id="info-` + i + `">
                     <b>Quelle:</b> ` + obj[i].video.dgs[0].source + `<br>
                     <b>Datum:</b> ` + obj[i].video.dgs[0].created + `<br>
-                    <b>Lizenz:</b> <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/de/">CC BY-NC-SA 3.0 DE</a>
+                    <b>Kategorie:</b> ` + categories + `<br>
+                    <b>Lizenz:</b> <a href="` + obj[0].video.dgs[0].license.url + `">` + obj[0].video.dgs[0].license.name + `</a>
                 </div>
             </div>
             </div>
