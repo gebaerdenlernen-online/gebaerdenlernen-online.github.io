@@ -67,12 +67,15 @@ if (user_data === null) {
             localStorage.setItem('user_data', xhr4.responseText);
 
             init()
+            initPracticeStacks()
         }
     };
     xhr4.open('GET', '/app/data/user_data.json', true);
     xhr4.send();
 } else {
     user_data = JSON.parse(user_data);
+    init()
+    initPracticeStacks()
 }
 
 if (document.getElementById("sign_count") !== null && dict !== null) {
@@ -86,8 +89,8 @@ if (document.getElementById('search') !== null) {
     });
 }
 
-if (document.getElementById("btn-fach-1") !== null) {
-    document.getElementById("btn-fach-1").addEventListener("click", function () {
+if (document.getElementById("btn-stack-0") !== null) {
+    document.getElementById("btn-stack-0").addEventListener("click", function () {
         vs = getPracticeSet(0);
         showPracticeHTML(vs, 0)
     });
@@ -245,6 +248,26 @@ function showSearchResult(id, word) {
 }
 
 // Learn new vocabulary
+
+function initPracticeStacks(){
+    for(var i = 0; i <= 5; i++){
+        stack = document.getElementById("stack-"+i);
+        stack_btn = document.getElementById("btn-stack-"+i)
+        console.log(stack, stack_btn);
+        if(stack == null || stack_btn == null){
+            continue;
+        }
+        if(user_data.data[i] != undefined){
+            stack.innerText = user_data.data[i].length
+            if(user_data.data[i].length == 0){
+                stack_btn.setAttribute("disabled","")
+                stack_btn.setAttribute("aria-disabled","true")
+                stack_btn.className = "btn btn-outline-secondary"
+            }
+        }
+    }
+    
+}
 
 function addToData(obj, num) {
     if (num >= 0 && num < 6) {
