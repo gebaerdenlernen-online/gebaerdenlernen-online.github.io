@@ -241,7 +241,10 @@ function searchResultHTML(word, obj) {
 }
 
 function initWordAddButtons(obj){
+    console.log("initWordAddButtons",obj);
     for(var i = 0; i<obj.length; i++){
+        toggleWordAddButton(document.getElementById("add-"+i),isWordInStack(obj[i].word.de))
+
         document.getElementById("add-"+i).addEventListener("click",function(event){
             var element = this
             var entry = obj[this.id.replace("add-", "")]
@@ -261,6 +264,7 @@ function initWordAddButtons(obj){
 }
 
 function toggleWordAddButton(element, isToggeled){
+    console.log(element,isToggeled);
     if(isToggeled){
         element.className = "btn btn-success text-right"
         element.innerHTML = '<i class="fas fa-check"></i>'
@@ -297,8 +301,18 @@ function initPracticeStacks(){
                 stack_btn.className = "btn btn-outline-secondary"
             }
         }
+    }  
+}
+
+function isWordInStack(word){
+    for(var i=0; i<user_data.data.length; i++){
+        for(var j=0; j<user_data.data[i].length; j++){
+            if(user_data.data[i][j].word.de == word){
+                return true
+            }
+        }
     }
-    
+    return false
 }
 
 function addToStack(obj, num) {
