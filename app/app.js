@@ -78,17 +78,30 @@ if (user_data === null) {
     initPracticeStacks()
 }
 
-if (document.getElementById("sign_count") !== null && dict !== null) {
-    document.getElementById('sign_count').innerText = dict.dict.length;
+// Only on the dict page
+if (window.location.pathname == "/app/dict/"){
+    // Show count of all words in dict
+    if (document.getElementById("sign_count") !== null && dict !== null) {
+        document.getElementById('sign_count').innerText = dict.dict.length;
+    }
+
+    // Setup search event for the dictonary
+    if (document.getElementById('search') !== null) {
+        document.getElementById('search').addEventListener("click", function (data) {
+            word = document.getElementById("search_input").value
+            window.location.hash = '#search='+encodeURI(word);
+            showSearchResult("search_result", word)
+        });
+    }
+
+    // Enable URL Anchor #search=param to store the latest search and enable to share the query
+    if(window.location.hash.match("#search=.*?")){
+        hash_query = window.location.hash.replace("#search=","")
+        showSearchResult("search_result", decodeURI(hash_query))
+    }
 }
 
-if (document.getElementById('search') !== null) {
-    document.getElementById('search').addEventListener("click", function (data) {
-        word = document.getElementById("search_input").value
-        showSearchResult("search_result", word)
-    });
-}
-
+// Setup practice mode can be removed if practicemode is integrated.
 if (document.getElementById("btn-stack-0") !== null) {
     document.getElementById("btn-stack-0").addEventListener("click", function () {
         vs = getPracticeSet(0);
@@ -96,8 +109,11 @@ if (document.getElementById("btn-stack-0") !== null) {
     });
 }
 
-
-// Word search
+////////////////////////////////////
+//                                //
+//   Dictonary Search Functions   //
+//                                //
+////////////////////////////////////
 
 function searchInDictForCategory(cat){
     result = []
@@ -267,14 +283,16 @@ function initWordAddButtons(obj){
 
 function toggleWordAddButton(element, isToggeled){
     console.log(element,isToggeled);
-    if(isToggeled){
-        element.className = "btn btn-success text-right"
-        element.innerHTML = '<i class="fas fa-check"></i>'
-        element.setAttribute("aria-toggle","false")
-    } else {
-        element.className = "btn btn-outline-success text-right"
-        element.innerHTML = '<i class="fas fa-folder-plus"></i>'
-        element.setAttribute("aria-toggle","true")
+    if(element!=null){
+        if(isToggeled){
+            element.className = "btn btn-success text-right"
+            element.innerHTML = '<i class="fas fa-check"></i>'
+            element.setAttribute("aria-toggle","false")
+        } else {
+            element.className = "btn btn-outline-success text-right"
+            element.innerHTML = '<i class="fas fa-folder-plus"></i>'
+            element.setAttribute("aria-toggle","true")
+        }
     }
 }
 
@@ -286,7 +304,13 @@ function showSearchResult(id, word) {
     initWordAddButtons(obj)
 }
 
-// Learn new vocabulary
+
+////////////////////////////////////
+//                                //
+//         Practice Mode          //
+//                                //
+////////////////////////////////////
+
 
 function initPracticeStacks(){
     for(var i = 0; i <= 5; i++){
@@ -306,6 +330,10 @@ function initPracticeStacks(){
     }  
 }
 
+/**
+ * Evaluates if a word exists in one of the learning stacks
+ * @param {string} word 
+ */
 function isWordInStack(word){
     for(var i=0; i<user_data.data.length; i++){
         for(var j=0; j<user_data.data[i].length; j++){
@@ -317,6 +345,11 @@ function isWordInStack(word){
     return false
 }
 
+/**
+ * Add an array of dictonary words to the stack.
+ * @param {Array} obj 
+ * @param {Integer} num 
+ */
 function addToStack(obj, num) {
     if (num >= 0 && num < 6) {
         for(var i = 0; i<obj.length; i++){
@@ -327,6 +360,11 @@ function addToStack(obj, num) {
     }
 }
 
+/**
+ * Remove an array of dictonary words from the stack.
+ * @param {Array} obj 
+ * @param {*} num 
+ */
 function removeFromStack(obj, num){
     if (num >= 0 && num < 6) {
         for(var i = 0; i<obj.length; i++){
@@ -422,7 +460,13 @@ function showPracticeHTML(vs, num) {
     }
 }
 
-// Useful functions
+
+////////////////////////////////////
+//                                //
+//        Useful Functions        //
+//                                //
+////////////////////////////////////
+
 
 function encodeHTMLEntities(string) {
     console.log("String:", string)
