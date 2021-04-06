@@ -182,9 +182,9 @@ function searchResultHTML(word, obj) {
                 break;
             }
             categories = ""
-            for(var k=0;k<obj[0].category.length;k++){
-                categories += obj[0].category[k]
-                if(k !== obj[0].category.length-1){
+            for(var k=0;k<obj[i].category.length;k++){
+                categories += obj[i].category[k]
+                if(k !== obj[i].category.length-1){
                     categories += ", "
                 }
             }
@@ -206,7 +206,7 @@ function searchResultHTML(word, obj) {
                     <b>Quelle:</b> ` + obj[i].video.dgs[0].source + `<br>
                     <b>Datum:</b> ` + obj[i].video.dgs[0].created + `<br>
                     <b>Kategorie:</b> ` + categories + `<br>
-                    <b>Lizenz:</b> <a href="` + obj[0].video.dgs[0].license.url + `">` + obj[0].video.dgs[0].license.name + `</a>
+                    <b>Lizenz:</b> <a href="` + obj[i].video.dgs[0].license.url + `">` + obj[i].video.dgs[0].license.name + `</a>
                 </div>
             </div>
             </div>
