@@ -255,7 +255,9 @@ function initWordAddButtons(obj){
                     addToStack([entry],0)
                     toggleWordAddButton(element,true)
                 } else {
-                    removeFromStack([entry],0)
+                    for(var i=0; i<6; i++){
+                        removeFromStack([entry],0)
+                    }
                     toggleWordAddButton(element,false)
                 }
             }
