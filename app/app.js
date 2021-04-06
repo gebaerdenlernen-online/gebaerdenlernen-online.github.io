@@ -111,6 +111,7 @@ if (document.getElementById("btn-stack-0") !== null) {
 
 if(window.location.pathname == "/app/dict/category/"){
     document.getElementById("categories").innerHTML = createCategoriesHTML();
+    addEventListenerPerCategory();
 }
 
 ////////////////////////////////////
@@ -318,6 +319,7 @@ function showSearchResult(id, word) {
 
 
 function searchByCategory(category) {
+    console.log("Category:",category);
     result = []
     for (var i = 0; i < dict.dict.length; i++) {
         for (var j = 0; j < dict.dict[i].category.length; j++) {
@@ -398,6 +400,52 @@ function createCategoriesHTML() {
     }
 
     return html
+}
+
+function addCategoryToStack(category){
+    obj = searchByCategory(category)
+    addToStack(obj,0)
+    user_data.categories.push(category)
+    saveUserData();
+}
+
+function removeCategoryFromStack(category){
+    obj = searchByCategory(category)
+    removeFromStack(obj,0)
+    user_data.categories.filter(function(obj){return obj !== category})
+    saveUserData();
+}
+
+function isCategoryInUserData(category){
+    for(var i=0; i<user_data.categories.length;i++){
+        if(user_data.categories[i] == category){
+            return true
+        }
+    } 
+    return false
+}
+
+function addEventListenerPerCategory(){
+    for(var i=0; i<meta.categories.length; i++){
+        toggleWordAddButton(document.getElementById("add-"+i),isCategoryInUserData(meta.categories[i]))
+        document.getElementById("add-"+i).addEventListener("click", function(event){
+            var element = this
+            var entry = this.id.replace("add-", "")
+
+            console.log(entry, this);
+            if (element !== null) {
+                if (element.getAttribute("aria-toggle") === "true") {
+                    addCategoryToStack(meta.categories[entry])
+                    toggleWordAddButton(element, true)
+                } else {
+                    for (var i = 0; i < 6; i++) {
+                        removeCategoryFromStack(meta.categories[entry])
+                    }
+                    toggleWordAddButton(element, false)
+                }
+            }
+        });
+    }
 }
 
 ////////////////////////////////////
