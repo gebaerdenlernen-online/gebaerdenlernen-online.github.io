@@ -1,7 +1,7 @@
 // Delete in production
 //localStorage.removeItem('dict')
-localStorage.removeItem('meta')
-localStorage.removeItem('settings')
+//localStorage.removeItem('meta')
+//localStorage.removeItem('settings')
 //localStorage.removeItem('user_data')
 
 // Init localStorage to save configurations and settings
@@ -107,6 +107,10 @@ if (document.getElementById("btn-stack-0") !== null) {
         vs = getPracticeSet(0);
         showPracticeHTML(vs, 0)
     });
+}
+
+if(window.location.pathname == "/app/dict/category/"){
+    document.getElementById("categories").innerHTML = createCategoriesHTML();
 }
 
 ////////////////////////////////////
@@ -298,10 +302,12 @@ function toggleWordAddButton(element, isToggeled) {
 
 function showSearchResult(id, word) {
     element = document.getElementById(id);
-    obj = searchInDict(word, false)
-    html = searchResultHTML(word, obj)
-    element.innerHTML = html
-    initWordAddButtons(obj)
+    if(element !== null){
+        obj = searchInDict(word, false)
+        html = searchResultHTML(word, obj)
+        element.innerHTML = html
+        initWordAddButtons(obj)
+    }
 }
 
 ////////////////////////////////////
@@ -323,13 +329,76 @@ function searchByCategory(category) {
     return result
 }
 
-function createCategoriesHTML() {
+function createWordsPerCategoryHTML(category){
     html = ""
+
+    obj = searchByCategory(category)
+
+    for(var i=0; i<obj.length; i++){
+        html += '<li class="list-group-item"><a href="/app/dict/#search='+encodeURI(obj[i].word.de)+'">'+obj[i].word.de+'</a></li>'
+    }
 
     return html
 }
 
+function createCategoriesHTML() {
+    html = ""
 
+    for(var i=0; i<meta.categories.length; i += 2){
+        html += `
+        <div class="row">`
+
+        if(meta.categories[i] !== null){
+            html += `
+                <div class="col-md">
+                    <div class="card text-center">
+                        <div class="card card-header">
+                            <div class="row">
+                                <div class="col-9">
+                                    <h5>`+meta.categories[i]+`</h5>
+                                </div>
+                                <div class="col-1">
+                                    <button class="btn btn-outline-success text-right" id="add-`+i+`" aria-toggle="true"><i class="fas fa-folder-plus"></i></button>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down" data-toggle="collapse" data-target="#category-`+i+`" aria-expanded="false" aria-controls="category-`+i+`"></i>
+                        </div>
+                        <ul class="list-group collapse" id="category-`+i+`" style="max-height:200px;margin-bottom:10px;overflow:scroll;-webkit-overflow-scrolling: touch;">
+                            `+createWordsPerCategoryHTML(meta.categories[i])+`
+                        </ul>
+                    </div>
+                    <br>
+                </div>`
+        }
+        if(meta.categories[i+1] !== null){
+            html += `
+                <div class="col-md">
+                    <div class="card text-center">
+                        <div class="card card-header">
+                            <div class="row">
+                                <div class="col-9">
+                                    <h5>`+meta.categories[i+1]+`</h5>
+                                </div>
+                                <div class="col-1">
+                                    <button class="btn btn-outline-success text-right" id="add-`+(i+1)+`" aria-toggle="true"><i class="fas fa-folder-plus"></i></button>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down" data-toggle="collapse" data-target="#category-`+(i+1)+`" aria-expanded="false" aria-controls="category-`+(i+1)+`"></i>
+                        </div>
+                        <ul class="list-group collapse" id="category-`+(i+1)+`" style="max-height:200px;margin-bottom:10px;overflow:scroll;-webkit-overflow-scrolling: touch;">
+                            `+createWordsPerCategoryHTML(meta.categories[i+1])+`
+                        </ul>
+                    </div>
+                    <br>
+                </div>`
+        }
+
+        html += `
+        </div>`;
+    }
+
+    return html
+}
 
 ////////////////////////////////////
 //                                //
