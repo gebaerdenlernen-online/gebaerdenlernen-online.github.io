@@ -2,7 +2,7 @@
 //localStorage.removeItem('dict')
 localStorage.removeItem('meta')
 localStorage.removeItem('settings')
-localStorage.removeItem('user_data')
+//localStorage.removeItem('user_data')
 
 // Init localStorage to save configurations and settings
 var dict = localStorage.getItem('dict');
@@ -169,7 +169,7 @@ function searchResultHTML(word, obj) {
                         <button class="btn btn-outline-info text-left" data-toggle="collapse" data-target="#info-`+0+`" aria-expanded="false" aria-controls="info-0"><i class="fab fa-creative-commons"></i></button>
                         </div>
                         <div class="col">
-                            <button class="btn btn-outline-success text-right" id="add-`+0+`"><i class="fas fa-folder-plus"></i></button>
+                            <button class="btn btn-outline-success text-right" id="add-`+0+`" aria-toggle="true"><i class="fas fa-folder-plus"></i></button>
                         </div>
                     </div>
                     <div class="text-left collapse" id="info-0">
@@ -217,7 +217,7 @@ function searchResultHTML(word, obj) {
                         <button class="btn btn-outline-info text-left" data-toggle="collapse" data-target="#info-`+i+`" aria-expanded="false" aria-controls="info-`+i+`"><i class="fab fa-creative-commons"></i></button>
                     </div>
                     <div class="col">
-                        <button class="btn btn-outline-success text-right" id="add-`+i+`"><i class="fas fa-folder-plus"></i></button>
+                        <button class="btn btn-outline-success text-right" id="add-`+i+`" aria-toggle="true"><i class="fas fa-folder-plus"></i></button>
                     </div>
                 </div>
                     <br>
@@ -240,11 +240,44 @@ function searchResultHTML(word, obj) {
     return html;
 }
 
+function initWordAddButtons(obj){
+    for(var i = 0; i<obj.length; i++){
+        document.getElementById("add-"+i).addEventListener("click",function(event){
+            var element = this
+            var entry = obj[this.id.replace("add-", "")]
+
+            console.log(entry, this);
+            if(element !== null){
+                if(element.getAttribute("aria-toggle") === "true"){
+                    addToStack([entry],0)
+                    toggleWordAddButton(element,true)
+                } else {
+                    removeFromStack([entry],0)
+                    toggleWordAddButton(element,false)
+                }
+            }
+        });
+    }
+}
+
+function toggleWordAddButton(element, isToggeled){
+    if(isToggeled){
+        element.className = "btn btn-success text-right"
+        element.innerHTML = '<i class="fas fa-check"></i>'
+        element.setAttribute("aria-toggle","false")
+    } else {
+        element.className = "btn btn-outline-success text-right"
+        element.innerHTML = '<i class="fas fa-folder-plus"></i>'
+        element.setAttribute("aria-toggle","true")
+    }
+}
+
 function showSearchResult(id, word) {
     element = document.getElementById(id);
     obj = searchInDict(word, false)
     html = searchResultHTML(word, obj)
     element.innerHTML = html
+    initWordAddButtons(obj)
 }
 
 // Learn new vocabulary
@@ -253,7 +286,6 @@ function initPracticeStacks(){
     for(var i = 0; i <= 5; i++){
         stack = document.getElementById("stack-"+i);
         stack_btn = document.getElementById("btn-stack-"+i)
-        console.log(stack, stack_btn);
         if(stack == null || stack_btn == null){
             continue;
         }
@@ -269,29 +301,45 @@ function initPracticeStacks(){
     
 }
 
-function addToData(obj, num) {
+function addToStack(obj, num) {
     if (num >= 0 && num < 6) {
         for(var i = 0; i<obj.length; i++){
+            console.log("addToStack["+num+"]",obj[i]);
             user_data.data[num].push(obj[i])
+            saveUserData()
+        }
+    }
+}
+
+function removeFromStack(obj, num){
+    if (num >= 0 && num < 6) {
+        for(var i = 0; i<obj.length; i++){
+            console.log("removeFromStack["+num+"]",obj[i]);
+            tmp = user_data.data[num].filter(function(item){
+                console.log(obj[i],item);
+                return obj[i].word.de !== item.word.de
+            })
+            user_data.data[num] = tmp
+            saveUserData()
         }
     }
 }
 
 function init() {
     if (user_data.data[0].length === 0) {
-        addToData(searchInDict('Vogel', true), 0);
-        addToData(searchInDict('Baum', true), 0);
-        addToData(searchInDict('Hund', true), 0);
-        addToData(searchInDict('Katze', true), 0);
-        addToData(searchInDict('Lampe', true), 0);
-        addToData(searchInDict('Papa', true), 0);
-        addToData(searchInDict('Mama', true), 0);
-        addToData(searchInDict('Oma', true), 0);
-        addToData(searchInDict('Opa', true), 0);
-        addToData(searchInDict('Ich', true), 0);
-        addToData(searchInDict('Du', true), 0);
+        addToStack(searchInDict('Vogel', true), 0);
+        addToStack(searchInDict('Baum', true), 0);
+        addToStack(searchInDict('Hund', true), 0);
+        addToStack(searchInDict('Katze', true), 0);
+        addToStack(searchInDict('Lampe', true), 0);
+        addToStack(searchInDict('Papa', true), 0);
+        addToStack(searchInDict('Mama', true), 0);
+        addToStack(searchInDict('Oma', true), 0);
+        addToStack(searchInDict('Opa', true), 0);
+        addToStack(searchInDict('Ich', true), 0);
+        addToStack(searchInDict('Du', true), 0);
 
-        localStorage.setItem("user_data", JSON.stringify(user_data))
+        saveUserData()
     }
 }
 
@@ -301,11 +349,13 @@ function getPracticeSet(num) {
 
     for (var i = 0; i < count; i++) {
         if (user_data.data[num] !== undefined) {
-            v = user_data.data[num].pop();
+            v = user_data.data[num].shift();
             console.log(i, v)
             vocabulary_set.push(v)
         }
     }
+
+    saveUserData()
 
     return vocabulary_set;
 }
@@ -371,4 +421,8 @@ function encodeHTMLEntities(string) {
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function saveUserData(){
+    localStorage.setItem("user_data", JSON.stringify(user_data))
 }
