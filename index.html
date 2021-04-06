@@ -14,7 +14,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Gebärden Lernen Online</a>
+        <a class="navbar-brand" href="/">Gebärden Lernen Online</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -24,7 +24,7 @@
               <a class="nav-link" href="/#">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/#dict">Wörterbuch</a>
+              <a class="nav-link" href="/app/dict">Wörterbuch</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/app">Üben</a>
@@ -41,20 +41,64 @@
 
       <div class="container">
       <!-- Dictonary -->
-        <h1>Wörterbuch</h1>
-        <p>Anzahl an Gebärden: <span id="sign_count">0</span></p>
-        <div class="row">
-            <div class="col-9">
-                <input id="search_input" class="form-control mr-sm-2" placeholder="Suche" aria-label="Search">
-            </div>
-            <div class="col-1">
-                <button id="search" class="btn btn-outline-success"><i class="fas fa-search"></i></button>
-            </div>
-        </div>
-        <br>
-        <div id="search_result">
+        <h1>Warum diese Seite?</h1>
+        <p>
+            Wir haben diese Seite erstellt weil wir kein anderes kostenfreies Lernprogramm 
+            gefunden haben mit dem man einfach Gebärden Vokabeln üben kann. Dieses Projekt 
+            stellt keine Alternative sondern nur eine Ergänzung zu Gebärdensprachkursen.
+        </p>
+        <p>
+            Aktuell basieren alle inhalte auf den Videos von <a href="https://gebaerdenlernen.de/">gebaerdenlernen.de</a>
+            welche ihre Videos unter der Creative Commons Lizenz anbieten.
+        </p>
 
-        </div>
+        <h1 id="help">Hilfe</h1>
+        <hr>
+        <h2>Wie kann ich diese Seite verwenden?</h2>
+        <p>
+            Im <a href="/app/dict">Wörterbuch</a> könnt ihr die entsprechenden Gebärden suchen und zu eurem 
+            Übungsstapel hinzufügen.
+        </p>
+        <p>
+            Unter dem Punkt <a href="/app">Üben</a> habt ihr die Möglichkeit eure neuen und schon gelernten Gebärden
+            abzufragen. 
+        </p>
+
+        <h3>Ablauf einer Übung</h3>
+        <ol>
+            <li>Wort oder Wortgruppe dem Übungsstapel hinzufügen</li>
+            <li>Übung starten</li>
+            <li>Gebärde in Wort <i>oder</i> Wort in Gebärde übersetzen.</li>
+            <li>Auswählen ob du richtig übersetzt hast. (nicht Schummeln)</li>
+            <li>Nächste Vokabel übersetzten</li>
+        </ol>
+        <p>
+            Richtige Vokabeln wandern ein Fach nach oben, falsche Vokabeln bleiben im 
+            Stapel und werden in der nächsten Übung erneut wiederholt.
+        </p>
+        
+        <h2>Wie funktioniert diese Seite?</h2>
+        <p>
+            Die Webseite selbst kommt ohne einen Server aus. Und läuft nur in deinem Browser 
+            und wird über <a href="https://github.com/gebaerdenlernen-online/gebaerdenlernen-online.github.io">GitHub</a>
+            betrieben um die Kosten zu minimieren. All eure Fortschritte werden lokal in eurem 
+            Browser gespeichert.
+        </p>
+        <p>
+            Es werden keine Daten an andere Unternehmen geschickt oder Cookies gespeichert.
+        </p>
+
+        <h1 id="support">Mitwirken</h1>
+        <hr>
+        <h2>Wie kann ich Unterstützen?</h2>
+        <p>
+            Geplant ist das jeder neue Gebärden hinzufügen kann. Wie das genau aussieht und 
+            ob vielleicht noch Dienste wie <a href="https://signdict.org/">signdict.org</a> 
+            ist noch nicht entschieden.
+
+            Wenn ihr Wünsche habt oder Fehler melden wollt kannst du das <a href="https://github.com/gebaerdenlernen-online/gebaerdenlernen-online.github.io/issues">hier</a> machen 
+            oder mir eine <a href="mailto:gebaerdenlernen.online@gmail.com">E-Mail</a> schreiben.
+        </p>
     </div>
 
     <!-- Optional JavaScript -->

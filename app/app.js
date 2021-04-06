@@ -150,25 +150,33 @@ function searchResultHTML(word, obj) {
             <h4>Bestes Ergebnis:</h4>
             <br>
             <div class="card text-center">
-            <div class="card-header">
-                <h4>` + encodeHTMLEntities(obj[0].word.de) + `</h4>
-            </div>
-            <br>
-            <div class="card-img-top embed-responsive embed-responsive-4by3">
-                <video class="embed-responsive-item" autoplay muted loop>
-                    <source src="` + encodeURI(obj[0].video.dgs[0].url) + `" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video> 
-            </div>
-            <div>
-                <i class="far fa-copyright text-right" data-toggle="collapse" data-target="#info-0" aria-expanded="false" aria-controls="info-0"></i>
-                <div class="collapse text-left" id="info-0">
-                    <b>Quelle:</b> ` + obj[0].video.dgs[0].source + `<br>
-                    <b>Datum:</b> ` + obj[0].video.dgs[0].created + `<br>
-                    <b>Kategorie:</b> ` + categories + `<br>
-                    <b>Lizenz:</b> <a href="` + obj[0].video.dgs[0].license.url + `">` + obj[0].video.dgs[0].license.name + `</a>
+                <div class="card-header">
+                    <h4 id="`+0+`">` + encodeHTMLEntities(obj[0].word.de) + `</h4>
                 </div>
-            </div>
+                <br>
+                <div class="card-img-top embed-responsive embed-responsive-4by3">
+                    <video class="embed-responsive-item" autoplay muted loop>
+                        <source src="` + encodeURI(obj[0].video.dgs[0].url) + `" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video> 
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                        <button class="btn btn-outline-info text-left" data-toggle="collapse" data-target="#info-`+0+`" aria-expanded="false" aria-controls="info-0"><i class="fab fa-creative-commons"></i></button>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-outline-success text-right" id="add-`+0+`"><i class="fas fa-folder-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="text-left collapse" id="info-0">
+                        <br>
+                        <b>Quelle:</b> ` + obj[0].video.dgs[0].source + `<br>
+                        <b>Datum:</b> ` + obj[0].video.dgs[0].created + `<br>
+                        <b>Kategorie:</b> ` + categories + `<br>
+                        <b>Lizenz:</b> <a href="` + obj[0].video.dgs[0].license.url + `">` + obj[0].video.dgs[0].license.name + `</a><br>
+                    </div>
+                </div>
             </div>
             <br>
             <hr>
@@ -191,7 +199,7 @@ function searchResultHTML(word, obj) {
 
             html += `<div class="card text-center">
             <div class="card-header" data-toggle="collapse" data-target="#video-` + i + `" aria-expanded="false" aria-controls="video-` + i + `">
-                <h4>` + encodeHTMLEntities(obj[i].word.de) + `</h4>
+                <h4 id="`+i+`">` + encodeHTMLEntities(obj[i].word.de) + `</h4>
             </div>
             <div class="collapse" id="video-` + i + `">
             <div class="card-img-top embed-responsive embed-responsive-4by3">
@@ -200,13 +208,22 @@ function searchResultHTML(word, obj) {
                     Your browser does not support the video tag.
                 </video>
             </div> 
-            <div>
-                <i class="far fa-copyright text-right" data-toggle="collapse" data-target="#info-` + i + `" aria-expanded="false" aria-controls="info-` + i + `"></i>
-                <div class="collapse text-left" id="info-` + i + `">
-                    <b>Quelle:</b> ` + obj[i].video.dgs[0].source + `<br>
-                    <b>Datum:</b> ` + obj[i].video.dgs[0].created + `<br>
-                    <b>Kategorie:</b> ` + categories + `<br>
-                    <b>Lizenz:</b> <a href="` + obj[i].video.dgs[0].license.url + `">` + obj[i].video.dgs[0].license.name + `</a>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-outline-info text-left" data-toggle="collapse" data-target="#info-`+i+`" aria-expanded="false" aria-controls="info-`+i+`"><i class="fab fa-creative-commons"></i></button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-outline-success text-right" id="add-`+i+`"><i class="fas fa-folder-plus"></i></button>
+                    </div>
+                </div>
+                    <br>
+                    <div class="collapse text-left" id="info-` + i + `">
+                        <b>Quelle:</b> ` + obj[i].video.dgs[0].source + `<br>
+                        <b>Datum:</b> ` + obj[i].video.dgs[0].created + `<br>
+                        <b>Kategorie:</b> ` + categories + `<br>
+                        <b>Lizenz:</b> <a href="` + obj[i].video.dgs[0].license.url + `">` + obj[i].video.dgs[0].license.name + `</a><br>
+                    </div>
                 </div>
             </div>
             </div>
