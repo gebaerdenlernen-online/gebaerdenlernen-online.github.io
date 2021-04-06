@@ -571,27 +571,34 @@ function createPracticeHTML(vocabulary_set, isVideoCollapse) {
             html += `
         <div id="exercise-`+i+`" class="card text-center">
             <div class="card-header">
-                <h4>Gebärde Üben</h4>
+                <h5>Wie lautet die Gebärde zu diesem Wort?</h5>
             </div>
-            <div class="card-img-top embed-responsive embed-responsive-4by3 collapse" id="video-`+i+`">
+            <br>
+            <br>
+                <h5 class="card-title" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h5>
+            <br>
+            
+            <div class="card-body">
+            <button class="btn btn-info"  data-toggle="collapse" href="#video-`+i+`" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
+            <br>
+            <div class="card-text embed-responsive embed-responsive-4by3 collapse" id="video-`+i+`">
                 <video class="embed-responsive-item" autoplay muted loop>
                     <source src="` + encodeURI(vocabulary_set[i].video.dgs[0].url) + `" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>      
+            <br>
+            <br>
+            <button class="btn btn-outline-info text-left" data-toggle="collapse" data-target="#info-` + i + `" aria-expanded="false" aria-controls="info-` + i + `"><i class="fab fa-creative-commons"></i></button>
+            <br>
             </div>
-            <div class="card-body">
-            <div class="collapse text-left" id="info-` + 0 + `">
+            <br>
+            <div class="collapse text-left" id="info-` + i + `">
                 <b>Quelle:</b> ` + vocabulary_set[i].video.dgs[0].source + `<br>
                 <b>Datum:</b> ` + vocabulary_set[i].video.dgs[0].created + `<br>
                 <b>Kategorie:</b> ` + categories + `<br>
                 <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[0].license.url + `">` + vocabulary_set[i].video.dgs[0].license.name + `</a><br><br>
             </div>
-            <button class="btn btn-outline-info text-left" data-toggle="collapse" data-target="#info-` + i + `" aria-expanded="false" aria-controls="info-` + i + `"><i class="fab fa-creative-commons"></i></button>
-            <button class="btn btn-info"  data-toggle="collapse" href="#video-`+i+`" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
             <div class="" id="word-`+i+`">
-                <br>
-                <h5 class="card-title" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h5>
-                <br>
                 <div class="row collapse" id="video-`+i+`">
                 <div class="col">
                     <button id="true-`+i+`" class="btn btn-outline-success"><i class="fas fa-check"></i></button>
@@ -605,12 +612,13 @@ function createPracticeHTML(vocabulary_set, isVideoCollapse) {
             <div class="card-footer text-muted">
             ` + (i + 1) + `/` + vocabulary_set.length + `
             </div>
-            </div>`;
+            </div>
+            <br>`;
         } else {
             html += `
         <div id="exercise-`+i+`" class="card text-center">
             <div class="card-header">
-                <h4>Wort Üben</h4>
+                <h5>Wie lautet das Wort zu dieser Gebärde?</h5>
             </div>
             <div class="card-img-top embed-responsive embed-responsive-4by3" id="video-`+i+`">
                 <video class="embed-responsive-item" autoplay muted loop>
@@ -644,9 +652,17 @@ function createPracticeHTML(vocabulary_set, isVideoCollapse) {
             <div class="card-footer text-muted">
             ` + (i + 1) + `/` + vocabulary_set.length + `
             </div>
-            </div>`;
+            </div>
+            <br>`;
         }
     }
+
+    if(isVideoCollapse){
+        html += '<div class="text-right"><button class="btn btn-success" id="next-1">Weiter <i class="fas fa-chevron-right"></i></button></div>'
+    } else {
+        html += '<div class="text-right"><button class="btn btn-danger" id="next-">Ergebnisse <i class="fas fa-chevron-right"></i></button></div>'
+    }
+    
 
     return html;
 }
