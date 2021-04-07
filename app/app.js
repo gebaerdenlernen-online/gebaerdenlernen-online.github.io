@@ -587,17 +587,17 @@ function createPracticeHTML(vocabulary_set, isVideoCollapse) {
                     <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[0].license.url + `">` + vocabulary_set[i].video.dgs[0].license.name + `</a><br><br>
                 </div>
                 <button class="btn btn-outline-info text-left" data-toggle="collapse" data-target="#info-` + i + `" aria-expanded="false" aria-controls="info-` + i + `"><i class="fab fa-creative-commons"></i></button>
-                <button class="btn btn-info"  data-toggle="collapse" href="#video-`+i+`" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
+                <button class="btn btn-info w-100"  data-toggle="collapse" href="#video-`+i+`" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
                 <div id="word-`+i+`">
                     <br>
                     <h5 class="card-title" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h5>
                     <br>
                     <div class="row collapse" id="video-`+i+`">
                         <div class="col">
-                            <button id="true-`+i+`" class="btn btn-outline-success" data-toggle="button" aria-pressed="false"><i class="fas fa-check"></i></button>
+                            <button id="true-`+i+`" class="btn btn-outline-success w-100" data-toggle="button" aria-pressed="false"><i class="fas fa-check"></i></button>
                         </div>
                         <div class="col">
-                            <button id="false-`+i+`" class="btn btn-outline-danger" data-toggle="button" aria-pressed="false"><i class="fas fa-times"></i></button>
+                            <button id="false-`+i+`" class="btn btn-outline-danger w-100" data-toggle="button" aria-pressed="false"><i class="fas fa-times"></i></button>
                         </div>
                     </div>
                 </div>
