@@ -569,51 +569,44 @@ function createPracticeHTML(vocabulary_set, isVideoCollapse) {
         }
         if(isVideoCollapse){
             html += `
-        <div id="exercise-`+i+`" class="card text-center">
-            <div class="card-header">
-                <h5>Wie lautet die Gebärde zu diesem Wort?</h5>
-            </div>
-            <br>
-            <br>
-                <h5 class="card-title" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h5>
-            <br>
-            
-            <div class="card-body">
-            <button class="btn btn-info"  data-toggle="collapse" href="#video-`+i+`" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
-            <br>
-            <div class="card-text embed-responsive embed-responsive-4by3 collapse" id="video-`+i+`">
-                <video class="embed-responsive-item" autoplay muted loop>
-                    <source src="` + encodeURI(vocabulary_set[i].video.dgs[0].url) + `" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>      
-            <br>
-            <br>
-            <button class="btn btn-outline-info text-left" data-toggle="collapse" data-target="#info-` + i + `" aria-expanded="false" aria-controls="info-` + i + `"><i class="fab fa-creative-commons"></i></button>
-            <br>
-            </div>
-            <br>
-            <div class="collapse text-left" id="info-` + i + `">
-                <b>Quelle:</b> ` + vocabulary_set[i].video.dgs[0].source + `<br>
-                <b>Datum:</b> ` + vocabulary_set[i].video.dgs[0].created + `<br>
-                <b>Kategorie:</b> ` + categories + `<br>
-                <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[0].license.url + `">` + vocabulary_set[i].video.dgs[0].license.name + `</a><br><br>
-            </div>
-            <div class="" id="word-`+i+`">
-                <div class="row collapse" id="video-`+i+`">
-                <div class="col">
-                    <button id="true-`+i+`" class="btn btn-outline-success"><i class="fas fa-check"></i></button>
+            <div id="exercise-`+i+`" class="card text-center">
+                <div class="card-header">
+                    <h5>Wie lautet die Gebärde zu diesem Wort?</h5>
                 </div>
-                <div class="col">
-                    <button id="false-`+i+`" class="btn btn-outline-danger"><i class="fas fa-times"></i></button>
+                <div class="card-img-top embed-responsive embed-responsive-4by3 collapse" id="video-`+i+`">
+                    <video class="embed-responsive-item" autoplay muted loop>
+                        <source src="` + encodeURI(vocabulary_set[i].video.dgs[0].url) + `" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>      
+                </div>
+                <div class="card-body">
+                <div class="collapse text-left" id="info-` + i + `">
+                    <b>Quelle:</b> ` + vocabulary_set[i].video.dgs[0].source + `<br>
+                    <b>Datum:</b> ` + vocabulary_set[i].video.dgs[0].created + `<br>
+                    <b>Kategorie:</b> ` + categories + `<br>
+                    <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[0].license.url + `">` + vocabulary_set[i].video.dgs[0].license.name + `</a><br><br>
+                </div>
+                <button class="btn btn-outline-info text-left" data-toggle="collapse" data-target="#info-` + i + `" aria-expanded="false" aria-controls="info-` + i + `"><i class="fab fa-creative-commons"></i></button>
+                <button class="btn btn-info"  data-toggle="collapse" href="#video-`+i+`" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
+                <div id="word-`+i+`">
+                    <br>
+                    <h5 class="card-title" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h5>
+                    <br>
+                    <div class="row">
+                        <div class="col">
+                            <button id="true-`+i+`" class="btn btn-outline-success"><i class="fas fa-check"></i></button>
+                        </div>
+                        <div class="col">
+                            <button id="false-`+i+`" class="btn btn-outline-danger"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
                 </div>
                 </div>
-            </div>
-            </div>
-            <div class="card-footer text-muted">
-            ` + (i + 1) + `/` + vocabulary_set.length + `
-            </div>
-            </div>
-            <br>`;
+                <div class="card-footer text-muted">
+                ` + (i + 1) + `/` + vocabulary_set.length + `
+                </div>
+                </div>
+                <br>`;
         } else {
             html += `
         <div id="exercise-`+i+`" class="card text-center">
