@@ -102,10 +102,16 @@ if (window.location.pathname == "/app/dict/") {
 }
 
 // Setup practice mode can be removed if practicemode is integrated.
-if (document.getElementById("btn-stack-0") !== null) {
-    document.getElementById("btn-stack-0").addEventListener("click", function () {
+if (document.getElementById("btn-stack-sign-0") !== null) {
+    document.getElementById("btn-stack-sign-0").addEventListener("click", function () {
         vs = getPracticeSet(0);
-        showPracticeHTML(vs)
+        showPracticeHTML(vs,0,true)
+    });
+}
+if (document.getElementById("btn-stack-word-0") !== null) {
+    document.getElementById("btn-stack-word-0").addEventListener("click", function () {
+        vs = getPracticeSet(0);
+        showPracticeHTML(vs,0,false)
     });
 }
 
@@ -458,16 +464,20 @@ function addEventListenerPerCategory(){
 function initPracticeStacks() {
     for (var i = 0; i <= 5; i++) {
         stack = document.getElementById("stack-" + i);
-        stack_btn = document.getElementById("btn-stack-" + i)
-        if (stack == null || stack_btn == null) {
+        stack_btn_word = document.getElementById("btn-stack-word-" + i)
+        stack_btn_sign = document.getElementById("btn-stack-sign-" + i)
+        if (stack == null || stack_btn_word == null | stack_btn_sign == null) {
             continue;
         }
         if (user_data.data[i] != undefined) {
             stack.innerText = user_data.data[i].length
             if (user_data.data[i].length == 0) {
-                stack_btn.setAttribute("disabled", "")
-                stack_btn.setAttribute("aria-disabled", "true")
-                stack_btn.className = "btn btn-outline-secondary"
+                stack_btn_word.setAttribute("disabled", "")
+                stack_btn_word.setAttribute("aria-disabled", "true")
+                stack_btn_word.className = "btn btn-outline-secondary w-100"
+                stack_btn_sign.setAttribute("disabled", "")
+                stack_btn_sign.setAttribute("aria-disabled", "true")
+                stack_btn_sign.className = "btn btn-outline-secondary w-100"
             }
         }
     }
@@ -561,63 +571,22 @@ function getPracticeSet(num) {
     return vocabulary_set;
 }
 
-function createPracticeHTML(vocabulary_set, isVideoCollapse) {
+function createPracticeHTML(vocabulary_set, i, isSign) {
     html = ""
-    for(var i=0; i<vocabulary_set.length; i++){
-        categories = ""
-        for (var k = 0; k < vocabulary_set[i].category.length; k++) {
-            categories += vocabulary_set[i].category[k]
-            if (k !== vocabulary_set[i].category.length - 1) {
-                categories += ", "
-            }
+    categories = ""
+    for (var k = 0; k < vocabulary_set[i].category.length; k++) {
+        categories += vocabulary_set[i].category[k]
+        if (k !== vocabulary_set[i].category.length - 1) {
+            categories += ", "
         }
-        if(isVideoCollapse){
-            html += `
-            <div id="exercise-`+i+`" class="card text-center">
-                <div class="card-header">
-                    <h5>Wie lautet die Gebärde zu diesem Wort?</h5>
-                </div>
-                <div class="card-img-top embed-responsive embed-responsive-4by3 collapse" id="video-`+i+`">
-                    <video class="embed-responsive-item" autoplay muted loop>
-                        <source src="` + encodeURI(vocabulary_set[i].video.dgs[0].url) + `" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>      
-                </div>
-                <div class="card-body">
-                <div class="collapse text-left" id="info-` + i + `">
-                    <b>Quelle:</b> ` + vocabulary_set[i].video.dgs[0].source + `<br>
-                    <b>Datum:</b> ` + vocabulary_set[i].video.dgs[0].created + `<br>
-                    <b>Kategorie:</b> ` + categories + `<br>
-                    <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[0].license.url + `">` + vocabulary_set[i].video.dgs[0].license.name + `</a><br><br>
-                </div>
-                <button class="btn btn-outline-info text-left w-30" data-toggle="collapse" data-target="#info-` + i + `" aria-expanded="false" aria-controls="info-` + i + `"><i class="fab fa-creative-commons"></i></button>
-                <button class="btn btn-info w-70"  data-toggle="collapse" href="#video-`+i+`" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
-                <div id="word-`+i+`">
-                    <br>
-                    <h4 class="card-title font-weight-bold text-uppercase" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h4>
-                    <hr>
-                    <div class="row collapse" id="video-`+i+`">
-                        <div class="col">
-                            <button id="true-`+i+`" class="btn btn-outline-success w-100" data-toggle="button" aria-pressed="false"><i class="fas fa-check"></i></button>
-                        </div>
-                        <div class="col">
-                            <button id="false-`+i+`" class="btn btn-outline-danger w-100" data-toggle="button" aria-pressed="false"><i class="fas fa-times"></i></button>
-                        </div>
-                    </div>
-                </div>
-                </div>
-                <div class="card-footer text-muted">
-                ` + (i + 1) + `/` + vocabulary_set.length + `
-                </div>
-                </div>
-                <br>`;
-        } else {
-            html += `
+    }
+    if(isSign){
+        html += `
         <div id="exercise-`+i+`" class="card text-center">
             <div class="card-header">
-                <h5>Wie lautet das Wort zu dieser Gebärde?</h5>
+                <h5>Wie lautet die Gebärde zu diesem Wort?</h5>
             </div>
-            <div class="card-img-top embed-responsive embed-responsive-4by3" id="video-`+i+`">
+            <div class="card-img-top embed-responsive embed-responsive-4by3 collapse" id="video-`+i+`">
                 <video class="embed-responsive-item" autoplay muted loop>
                     <source src="` + encodeURI(vocabulary_set[i].video.dgs[0].url) + `" type="video/mp4">
                     Your browser does not support the video tag.
@@ -630,18 +599,18 @@ function createPracticeHTML(vocabulary_set, isVideoCollapse) {
                 <b>Kategorie:</b> ` + categories + `<br>
                 <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[0].license.url + `">` + vocabulary_set[i].video.dgs[0].license.name + `</a><br><br>
             </div>
-            <button class="btn btn-outline-info text-left" data-toggle="collapse" data-target="#info-` + i + `" aria-expanded="false" aria-controls="info-` + i + `"><i class="fab fa-creative-commons"></i></button>
-            <button class="btn btn-info"  data-toggle="collapse" href="#word-`+i+`" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
-            <div class="collapse" id="word-`+i+`">
+            <button class="btn btn-outline-info text-left w-30" data-toggle="collapse" data-target="#info-` + i + `" aria-expanded="false" aria-controls="info-` + i + `"><i class="fab fa-creative-commons"></i></button>
+            <button id="solution-`+i+`" class="btn btn-info w-70"  data-toggle="collapse" href="#video-`+i+`" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
+            <div id="word-`+i+`">
                 <br>
                 <h4 class="card-title font-weight-bold text-uppercase" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h4>
-                <br>
-                <div class="row">
+                <hr>
+                <div class="row collapse" id="video-`+i+`">
                     <div class="col">
-                        <button id="true-`+i+`" class="btn btn-outline-success" data-toggle="button" aria-pressed="false"><i class="fas fa-check"></i></button>
+                        <button id="true-`+i+`" class="btn btn-outline-success w-100" data-toggle="button" aria-pressed="false"><i class="fas fa-check"></i></button>
                     </div>
                     <div class="col">
-                        <button id="false-`+i+`" class="btn btn-outline-danger" data-toggle="button" aria-pressed="false"><i class="fas fa-times"></i></button>
+                        <button id="false-`+i+`" class="btn btn-outline-danger w-100" data-toggle="button" aria-pressed="false"><i class="fas fa-times"></i></button>
                     </div>
                 </div>
             </div>
@@ -651,23 +620,59 @@ function createPracticeHTML(vocabulary_set, isVideoCollapse) {
             </div>
             </div>
             <br>`;
-        }
-    }
-
-    if(isVideoCollapse){
-        html += '<div class="text-center"><button class="btn btn-success w-100" id="next-1">Weiter <i class="fas fa-chevron-right"></i></button></div>'
     } else {
-        html += '<div class="text-right"><button class="btn btn-danger" id="next-">Ergebnisse <i class="fas fa-chevron-right"></i></button></div>'
+        html += `
+    <div id="exercise-`+i+`" class="card text-center">
+        <div class="card-header">
+            <h5>Wie lautet das Wort zu dieser Gebärde?</h5>
+        </div>
+        <div class="card-img-top embed-responsive embed-responsive-4by3" id="video-`+i+`">
+            <video class="embed-responsive-item" autoplay muted loop>
+                <source src="` + encodeURI(vocabulary_set[i].video.dgs[0].url) + `" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>      
+        </div>
+        <div class="card-body">
+        <div class="collapse text-left" id="info-` + i + `">
+            <b>Quelle:</b> ` + vocabulary_set[i].video.dgs[0].source + `<br>
+            <b>Datum:</b> ` + vocabulary_set[i].video.dgs[0].created + `<br>
+            <b>Kategorie:</b> ` + categories + `<br>
+            <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[0].license.url + `">` + vocabulary_set[i].video.dgs[0].license.name + `</a><br><br>
+        </div>
+        <button class="btn btn-outline-info text-left" data-toggle="collapse" data-target="#info-` + i + `" aria-expanded="false" aria-controls="info-` + i + `"><i class="fab fa-creative-commons"></i></button>
+        <button id="solution-`+i+`" class="btn btn-info"  data-toggle="collapse" href="#word-`+i+`" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
+        <div class="collapse" id="word-`+i+`">
+            <br>
+            <h4 class="card-title font-weight-bold text-uppercase" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h4>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <button id="true-`+i+`" class="btn btn-outline-success" data-toggle="button" aria-pressed="false"><i class="fas fa-check"></i></button>
+                </div>
+                <div class="col">
+                    <button id="false-`+i+`" class="btn btn-outline-danger" data-toggle="button" aria-pressed="false"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="card-footer text-muted">
+        ` + (i + 1) + `/` + vocabulary_set.length + `
+        </div>
+        </div>
+        <br>`;
     }
-    
 
     return html;
 }
 
-function showPracticeHTML(vs) {
-    if (document.getElementById("practice") !== null) {
-        document.getElementById("practice").innerHTML = createPracticeHTML(vs, true)
+function showPracticeHTML(vocabulary_set,i,isSign) {
 
+    if (document.getElementById("practice") !== null) {
+        document.getElementById("practice").innerHTML = createPracticeHTML(vocabulary_set, i, isSign)
+
+        document.getElementById("true-"+i)
+        document.getElementById("true-"+i)
+        document.getElementById("false"+i)
     }
 }
 
