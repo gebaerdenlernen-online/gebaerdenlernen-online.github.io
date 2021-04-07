@@ -66,9 +66,19 @@
             Alle Daten dieser Anwendug werden nur bei dir im Browser gespeichert. Wenn 
             du auch in einem anderen Browser lernen möchtest musst du hier ein Backup erstellen.
         </p>
-        <button class="btn btn-success"><i class="fas fa-download"></i> Backup Erstellen</button>
+        <button class="btn btn-success" onclick="download('gebaerden.online.backup',JSON.stringify(user_data))"><i class="fas fa-download"></i> Backup Erstellen</button>
         <br>
-        <button class="btn btn-primary"><i class="fas fa-upload"></i> Backup Wiederherstellen</button>
+        <br>
+        <h3>Backup Widerherstellen</h3>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroupFileAddon01"><i class="fas fa-upload"></i></span>
+            </div>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+              <label class="custom-file-label" for="inputGroupFile01">Datei Auswählen</label>
+            </div>
+          </div>
     
         <h2 class="text-danger pt-5">Danger Zone</h2>
         <hr>
