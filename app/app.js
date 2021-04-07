@@ -544,9 +544,13 @@ function getPracticeSet(num) {
     count = settings.number_of_words_per_session
     vocabulary_set = []
 
+    if(count > user_data.data[num].length){
+        count = user_data.data[num].length-1
+    }
+
     for (var i = 0; i < count; i++) {
         if (user_data.data[num] !== undefined) {
-            v = user_data.data[num].shift();
+            v = user_data.data[num][i];
             console.log(i, v)
             vocabulary_set.push(v)
         }
@@ -586,8 +590,8 @@ function createPracticeHTML(vocabulary_set, isVideoCollapse) {
                     <b>Kategorie:</b> ` + categories + `<br>
                     <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[0].license.url + `">` + vocabulary_set[i].video.dgs[0].license.name + `</a><br><br>
                 </div>
-                <button class="btn btn-outline-info text-left" data-toggle="collapse" data-target="#info-` + i + `" aria-expanded="false" aria-controls="info-` + i + `"><i class="fab fa-creative-commons"></i></button>
-                <button class="btn btn-info w-100"  data-toggle="collapse" href="#video-`+i+`" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
+                <button class="btn btn-outline-info text-left w-30" data-toggle="collapse" data-target="#info-` + i + `" aria-expanded="false" aria-controls="info-` + i + `"><i class="fab fa-creative-commons"></i></button>
+                <button class="btn btn-info w-70"  data-toggle="collapse" href="#video-`+i+`" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
                 <div id="word-`+i+`">
                     <br>
                     <h5 class="card-title" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h5>
