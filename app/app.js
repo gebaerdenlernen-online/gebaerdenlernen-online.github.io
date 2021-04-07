@@ -594,8 +594,8 @@ function createPracticeHTML(vocabulary_set, isVideoCollapse) {
                 <button class="btn btn-info w-70"  data-toggle="collapse" href="#video-`+i+`" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
                 <div id="word-`+i+`">
                     <br>
-                    <h5 class="card-title" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h5>
-                    <br>
+                    <h4 class="card-title font-weight-bold text-uppercase" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h4>
+                    <hr>
                     <div class="row collapse" id="video-`+i+`">
                         <div class="col">
                             <button id="true-`+i+`" class="btn btn-outline-success w-100" data-toggle="button" aria-pressed="false"><i class="fas fa-check"></i></button>
@@ -634,7 +634,7 @@ function createPracticeHTML(vocabulary_set, isVideoCollapse) {
             <button class="btn btn-info"  data-toggle="collapse" href="#word-`+i+`" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
             <div class="collapse" id="word-`+i+`">
                 <br>
-                <h5 class="card-title" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h5>
+                <h4 class="card-title font-weight-bold text-uppercase" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h4>
                 <br>
                 <div class="row">
                     <div class="col">
@@ -655,7 +655,7 @@ function createPracticeHTML(vocabulary_set, isVideoCollapse) {
     }
 
     if(isVideoCollapse){
-        html += '<div class="text-right"><button class="btn btn-success" id="next-1">Weiter <i class="fas fa-chevron-right"></i></button></div>'
+        html += '<div class="text-center"><button class="btn btn-success w-100" id="next-1">Weiter <i class="fas fa-chevron-right"></i></button></div>'
     } else {
         html += '<div class="text-right"><button class="btn btn-danger" id="next-">Ergebnisse <i class="fas fa-chevron-right"></i></button></div>'
     }
