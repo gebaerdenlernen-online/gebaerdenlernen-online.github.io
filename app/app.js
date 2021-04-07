@@ -592,12 +592,12 @@ function createPracticeHTML(vocabulary_set, isVideoCollapse) {
                     <br>
                     <h5 class="card-title" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h5>
                     <br>
-                    <div class="row">
+                    <div class="row collapse" id="video-`+i+`">
                         <div class="col">
-                            <button id="true-`+i+`" class="btn btn-outline-success"><i class="fas fa-check"></i></button>
+                            <button id="true-`+i+`" class="btn btn-outline-success" data-toggle="button" aria-pressed="false"><i class="fas fa-check"></i></button>
                         </div>
                         <div class="col">
-                            <button id="false-`+i+`" class="btn btn-outline-danger"><i class="fas fa-times"></i></button>
+                            <button id="false-`+i+`" class="btn btn-outline-danger" data-toggle="button" aria-pressed="false"><i class="fas fa-times"></i></button>
                         </div>
                     </div>
                 </div>
@@ -634,10 +634,10 @@ function createPracticeHTML(vocabulary_set, isVideoCollapse) {
                 <br>
                 <div class="row">
                     <div class="col">
-                        <button id="true-`+i+`" class="btn btn-outline-success"><i class="fas fa-check"></i></button>
+                        <button id="true-`+i+`" class="btn btn-outline-success" data-toggle="button" aria-pressed="false"><i class="fas fa-check"></i></button>
                     </div>
                     <div class="col">
-                        <button id="false-`+i+`" class="btn btn-outline-danger"><i class="fas fa-times"></i></button>
+                        <button id="false-`+i+`" class="btn btn-outline-danger" data-toggle="button" aria-pressed="false"><i class="fas fa-times"></i></button>
                     </div>
                 </div>
             </div>
