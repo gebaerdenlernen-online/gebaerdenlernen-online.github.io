@@ -653,10 +653,10 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
             <br>
             <div class="row">
                 <div class="col">
-                    <button id="true-`+i+`" class="btn btn-outline-success" data-toggle="button" aria-pressed="false"><i class="fas fa-check"></i></button>
+                    <button id="true-`+i+`" class="btn btn-outline-success w-100" data-toggle="button" aria-pressed="false"><i class="fas fa-check"></i></button>
                 </div>
                 <div class="col">
-                    <button id="false-`+i+`" class="btn btn-outline-danger" data-toggle="button" aria-pressed="false"><i class="fas fa-times"></i></button>
+                    <button id="false-`+i+`" class="btn btn-outline-danger w-100" data-toggle="button" aria-pressed="false"><i class="fas fa-times"></i></button>
                 </div>
             </div>
         </div>
