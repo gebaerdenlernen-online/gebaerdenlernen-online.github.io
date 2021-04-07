@@ -734,6 +734,11 @@ function resetAll(){
     window.location.href = "/app/settings/"
 }
 
+function saveSettings(){
+    settings.number_of_words_per_session = document.getElementById("number_of_words_per_session").value;
+    localStorage.setItem("settings", settings)
+}
+
 function download(filename, text) {
     var element = document.createElement('a');
     element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(text));
