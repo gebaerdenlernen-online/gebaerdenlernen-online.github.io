@@ -147,6 +147,10 @@ function searchInDict(word, isExactMatch) {
     console.log("Search Word:", word)
     result = [];
 
+    if(dict == null){
+        return result
+    }
+
     for (var i = 0; i < dict.dict.length; i++) {
         if (dict.dict[i].word.de.toLowerCase() === word.toLowerCase()) {
             result.push(dict.dict[i])
@@ -561,7 +565,7 @@ function getPracticeSet(num) {
     vocabulary_set = []
 
     if(count > user_data.data[num].length){
-        count = user_data.data[num].length-1
+        count = user_data.data[num].length
     }
 
     for (var i = 0; i < count; i++) {
@@ -707,6 +711,10 @@ function showPracticeHTML(vocabulary_set,i,isSign,stackNum) {
 //                                //
 ////////////////////////////////////
 
+if(window.location.pathname == "/app/settings/"){
+    document.getElementById("number_of_words_per_session").value = parseInt(settings.number_of_words_per_session)
+}
+
 function resetUserData(){
     localStorage.removeItem('user_data')
 
@@ -735,8 +743,8 @@ function resetAll(){
 }
 
 function saveSettings(){
-    settings.number_of_words_per_session = document.getElementById("number_of_words_per_session").value;
-    localStorage.setItem("settings", settings)
+    settings.number_of_words_per_session = parseInt(document.getElementById("number_of_words_per_session").value);
+    localStorage.setItem("settings", JSON.stringify(settings))
 }
 
 function download(filename, text) {
