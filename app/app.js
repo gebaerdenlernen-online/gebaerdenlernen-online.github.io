@@ -102,17 +102,21 @@ if (window.location.pathname == "/app/dict/") {
 }
 
 // Setup practice mode can be removed if practicemode is integrated.
-if (document.getElementById("btn-stack-sign-0") !== null) {
-    document.getElementById("btn-stack-sign-0").addEventListener("click", function () {
-        vs = getPracticeSet(0);
-        showPracticeHTML(vs,0,true)
-    });
-}
-if (document.getElementById("btn-stack-word-0") !== null) {
-    document.getElementById("btn-stack-word-0").addEventListener("click", function () {
-        vs = getPracticeSet(0);
-        showPracticeHTML(vs,0,false)
-    });
+for(var k=0; k<6; k++){
+    if (document.getElementById("btn-stack-sign-"+k) !== null) {
+        document.getElementById("btn-stack-sign-"+k).addEventListener("click", function () {
+            var i = parseInt(this.id.replace("btn-stack-sign-",""))
+            vs = getPracticeSet(i);
+            showPracticeHTML(vs,0,true,i)
+        });
+    }
+    if (document.getElementById("btn-stack-word-"+k) !== null) {
+        document.getElementById("btn-stack-word-"+k).addEventListener("click", function () {
+            var i = parseInt(this.id.replace("btn-stack-word-",""))
+            vs = getPracticeSet(i);
+            showPracticeHTML(vs,0,false,i)
+        });
+    }
 }
 
 if(window.location.pathname == "/app/dict/category/"){
@@ -274,7 +278,7 @@ function initWordAddButtons(obj) {
 
         document.getElementById("add-" + i).addEventListener("click", function (event) {
             var element = this
-            var entry = obj[this.id.replace("add-", "")]
+            var entry = obj[parseInt(this.id.replace("add-", ""))]
 
             console.log(entry, this);
             if (element !== null) {
@@ -436,7 +440,7 @@ function addEventListenerPerCategory(){
         toggleWordAddButton(document.getElementById("add-"+i),isCategoryInUserData(meta.categories[i]))
         document.getElementById("add-"+i).addEventListener("click", function(event){
             var element = this
-            var entry = this.id.replace("add-", "")
+            var entry = parseInt(this.id.replace("add-", ""))
 
             console.log(entry, this);
             if (element !== null) {
@@ -551,6 +555,8 @@ function init() {
 }
 
 function getPracticeSet(num) {
+    console.log("Num",num);
+
     count = settings.number_of_words_per_session
     vocabulary_set = []
 
@@ -665,21 +671,68 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
     return html;
 }
 
-function showPracticeHTML(vocabulary_set,i,isSign) {
+function showPracticeHTML(vocabulary_set,i,isSign,stackNum) {
 
     if (document.getElementById("practice") !== null) {
+        if(vocabulary_set[i] === undefined){
+            window.location.href = "/app/"
+            return
+        }
+
         document.getElementById("practice").innerHTML = createPracticeHTML(vocabulary_set, i, isSign)
 
-        document.getElementById("true-"+i)
-        document.getElementById("true-"+i)
-        document.getElementById("false"+i)
+        document.getElementById("true-"+i).setAttribute("data-stack",stackNum)
+        document.getElementById("true-"+i).addEventListener("click",function(event){
+            var stackNum = parseInt(this.getAttribute("data-stack"))
+            removeFromStack([vocabulary_set[i]],stackNum)
+            addToStack([vocabulary_set[i]],(stackNum+1>5)?5:stackNum+1)
+            saveUserData()
+            showPracticeHTML(vocabulary_set,i+1,isSign,stackNum)
+        })
+        document.getElementById("false-"+i).setAttribute("data-stack",stackNum)
+        document.getElementById("false-"+i).addEventListener("click",function(event){
+            var stackNum = parseInt(this.getAttribute("data-stack"))
+            removeFromStack([vocabulary_set[i]],stackNum)
+            addToStack([vocabulary_set[i]],stackNum)
+            saveUserData()
+            showPracticeHTML(vocabulary_set,i+1,isSign,stackNum)
+        })
     }
 }
 
-function initPracticeModeButtons(){
-    document.getElementById
+
+////////////////////////////////////
+//                                //
+//           Settings             //
+//                                //
+////////////////////////////////////
+
+function resetUserData(){
+    localStorage.removeItem('user_data')
+
+    window.location.href = "/app/settings/"
 }
 
+function resetDictionary(){
+    localStorage.removeItem('dict')
+
+    window.location.href = "/app/settings/"  
+}
+
+function resetSettings(){
+    localStorage.removeItem('settings')
+
+    window.location.href = "/app/settings/"
+}
+
+function resetAll(){
+    localStorage.removeItem('dict')
+    localStorage.removeItem('meta')
+    localStorage.removeItem('settings')
+    localStorage.removeItem('user_data')
+
+    window.location.href = "/app/settings/"
+}
 
 ////////////////////////////////////
 //                                //
@@ -705,4 +758,5 @@ function sleep(ms) {
 
 function saveUserData() {
     localStorage.setItem("user_data", JSON.stringify(user_data))
+    console.log("Saved User Data:",user_data);
 }
