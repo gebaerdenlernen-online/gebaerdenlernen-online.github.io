@@ -74,6 +74,9 @@ if (user_data === null) {
     xhr4.send();
 } else {
     user_data = JSON.parse(user_data);
+    if(user_data.data[0].length == 0)[
+        setExerciseToStack("Basics")
+    ]
     initPracticeStacks()
 }
 
@@ -147,6 +150,7 @@ function searchInDict(word, isExactMatch) {
     result = [];
 
     if (dict == null) {
+        console.error("Dictonary not loaded! Returned empty result.");
         return result
     }
 
@@ -694,8 +698,10 @@ function showPracticeHTML(vocabulary_set, i, isSign, stackNum) {
 ////////////////////////////////////
 
 function setExerciseToStack(exerciseName) {
+    console.log("Exercise Name:",exerciseName);
     if(meta != null){
         var exercise = meta.exercises[exerciseName]
+        console.log("Exercise:",exercise);
         if (exercise == null) {
             console.error("Exercise \"" + exerciseName + "\" not found!");
             return
@@ -703,13 +709,15 @@ function setExerciseToStack(exerciseName) {
         for(var i=0; i<exercise.length; i++){
             for(var j=0; j<exercise[i].length; j++){
                 var word = searchInDict(exercise[i][j],true)
-                if(word == []){
+                console.log("Exercise Word:",word);
+                if(word.length == 0){
                     console.warn("The word \""+exercise[i][j]+"\" was not found try alternative word or synonym.");
                     continue
                 }
                 addToStack(word,0)
             }
         }
+        saveUserData()
     }
 }
 

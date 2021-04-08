@@ -96,7 +96,7 @@
 
       [
         "Sonne",
-        "Wolken",
+        "Wolke",
         "Regen",
         "Schnee"
       ],
@@ -119,7 +119,7 @@
         "Hose",
         "T-Shirt",
         "Schuhe",
-        "Socken",
+        "Socke",
         "Mütze",
         "Jacke"
       ],
@@ -160,7 +160,6 @@
         "Schrank",
         "Sessel",
         "Sofa",
-        "Couch",
         "Tisch",
         "Stuhl",
         "Spiegel",
@@ -174,12 +173,12 @@
 
       [
         "Haus",
-        "Türe",
+        "Tür",
         "Treppe",
         "Fenster",
         "Wand",
         "Decke",
-        "Boden"
+        "Fußboden"
       ],
 
       [
@@ -197,24 +196,23 @@
         "Fluss",
         "Meer",
         "Landschaft",
-        "Berg",
+        "Berge",
         "Wald",
         "Feld",
         "Park"
       ],
 
       [
-        "hungrig",
+        "Hunger",
         "glücklich",
         "traurig",
-        "wütend",
-        "ängstlich"
+        "Wut",
+        "Angst"
       ],
 
       [
         "laufen",
         "stehen",
-        "gehen",
         "sitzen"
       ]
     ]
