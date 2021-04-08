@@ -24725,22 +24725,25 @@
                 "de": "hallo"
             },
             "video": {
-                "dgs": [{
-                    "source": "https://gebaerdenlernen.de/",
-                    "url": "https://gebaerdenlernen.de/vid/hallo.mp4",
-                    "created": "5.4.2021",
-                    "license": {
-                        "name": "CC BY-NC-SA 3.0 DE",
-                        "url": "https://creativecommons.org/licenses/by-nc-sa/3.0/de/"
-                    }},
+                "dgs": [
                     {
-                    "source": "https://www.spreadthesign.com",
-                    "url": "https://media.spreadthesign.com/video/mp4/9/17657.mp4",
-                    "created": "7.4.2021",
-                    "license": {
-                        "name": "© European Sign Language Center",
-                        "url": "https://www.spreadthesign.com"
-                    }}
+                        "source": "https://gebaerdenlernen.de/",
+                        "url": "https://gebaerdenlernen.de/vid/hallo.mp4",
+                        "created": "5.4.2021",
+                        "license": {
+                            "name": "CC BY-NC-SA 3.0 DE",
+                            "url": "https://creativecommons.org/licenses/by-nc-sa/3.0/de/"
+                        }
+                    },
+                    {
+                        "source": "https://www.spreadthesign.com",
+                        "url": "https://media.spreadthesign.com/video/mp4/9/17657.mp4",
+                        "created": "7.4.2021",
+                        "license": {
+                            "name": "© European Sign Language Center",
+                            "url": "https://www.spreadthesign.com"
+                            }
+                    }
                 ]
             },
             "category": [

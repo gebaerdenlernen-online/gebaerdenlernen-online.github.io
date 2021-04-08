@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
@@ -56,30 +57,51 @@
         <hr>
         <div class="form-group">
             <label for="number_of_words_per_session">Anzahl der Fragen pro Level</label>
-            <input class="form-control" type="number" min="0" max="100" placeholder="Anzahl" value="10" id="number_of_words_per_session"></input>
+            <input class="form-control" type="number" min="0" max="100" placeholder="Anzahl" value="10"
+                id="number_of_words_per_session"></input>
         </div>
         <br>
         <button class="btn btn-success" onclick="saveSettings()">Speichern</button>
-    
+        <br>
+        <br>
+
+        <h2 class="pt5">Eigenes Wörterbuch</h2>
+        <p>
+            Wenn du dein eigenes Wörterbuch erstellt hast kannst du es hier in die Anwendung einfügen.
+        </p>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01"><i class="fas fa-upload"></i></span>
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                    aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="inputGroupFile01">Datei Auswählen</label>
+            </div>
+        </div>
+
+
         <h2 class="pt-5">Daten Backup</h2>
         <p>
-            Alle Daten dieser Anwendug werden nur bei dir im Browser gespeichert. Wenn 
+            Alle Daten dieser Anwendug werden nur bei dir im Browser gespeichert. Wenn
             du auch in einem anderen Browser lernen möchtest musst du hier ein Backup erstellen.
         </p>
-        <button class="btn btn-success" onclick="download('gebaerden.online.backup',JSON.stringify(user_data))"><i class="fas fa-download"></i> Backup Erstellen</button>
+        <button class="btn btn-success" onclick="download('gebaerden.online.backup',JSON.stringify(user_data))"><i
+                class="fas fa-download"></i> Backup Erstellen</button>
         <br>
         <br>
         <h3>Backup Widerherstellen</h3>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroupFileAddon01"><i class="fas fa-upload"></i></span>
+                <span class="input-group-text" id="inputGroupFileAddon02"><i class="fas fa-upload"></i></span>
             </div>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-              <label class="custom-file-label" for="inputGroupFile01">Datei Auswählen</label>
+                <input type="file" class="custom-file-input" id="inputGroupFile02"
+                    aria-describedby="inputGroupFileAddon02">
+                <label class="custom-file-label" for="inputGroupFile02">Datei Auswählen</label>
             </div>
-          </div>
-    
+        </div>
+
         <h2 class="text-danger pt-5">Danger Zone</h2>
         <hr>
         <div>
@@ -94,24 +116,28 @@
             <br>
 
             <p>Dies setzt die Einstellungen auf den Ursprung zurück.</p>
-            <button class="btn btn-danger w-100"  onclick="resetSettings()">Einstellungen Zurücksetzen</button>
+            <button class="btn btn-danger w-100" onclick="resetSettings()">Einstellungen Zurücksetzen</button>
             <br>
             <br>
 
             <p>Den Werkszustand widerherstellen.</p>
-            <button class="btn btn-danger w-100"  onclick="resetAll()">Alles Zurücksetzen</button>
+            <button class="btn btn-danger w-100" onclick="resetAll()">Alles Zurücksetzen</button>
             <br>
             <br>
         </div>
-        
+
     </div>
-   
+
 
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
     <script src="/app/app.js"></script>
 </body>
 

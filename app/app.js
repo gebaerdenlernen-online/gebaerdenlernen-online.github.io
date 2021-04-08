@@ -1,9 +1,3 @@
-// Delete in production
-//localStorage.removeItem('dict')
-//localStorage.removeItem('meta')
-//localStorage.removeItem('settings')
-//localStorage.removeItem('user_data')
-
 // Init localStorage to save configurations and settings
 var dict = localStorage.getItem('dict');
 var meta = localStorage.getItem('meta');
