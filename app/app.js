@@ -573,7 +573,7 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
     }
     if (isSign) {
         html += `
-        <div id="exercise-` + i + `" class="card text-center">
+        <div id="exercise-` + i + `" class="card text-center pt-5">
             <div class="card-header">
                 <h5>Wie lautet die Gebärde zu diesem Wort?</h5>
             </div>
@@ -613,7 +613,7 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
             <br>`;
     } else {
         html += `
-    <div id="exercise-` + i + `" class="card text-center">
+    <div id="exercise-` + i + `" class="card text-center pt-5">
         <div class="card-header">
             <h5>Wie lautet das Wort zu dieser Gebärde?</h5>
         </div>
