@@ -678,7 +678,7 @@ function showPracticeHTML(vocabulary_set, i, isSign, stackNum) {
         document.getElementById("false-" + i).addEventListener("click", function (event) {
             var stackNum = parseInt(this.getAttribute("data-stack"))
             removeFromStack([vocabulary_set[i]], stackNum)
-            addToStack([vocabulary_set[i]], stackNum)
+            addToStack([vocabulary_set[i]], 0)
             saveUserData()
             showPracticeHTML(vocabulary_set, i + 1, isSign, stackNum)
         })
