@@ -745,8 +745,8 @@ function resetSettings() {
 }
 
 function resetAll() {
-    localStorage.removeItem('dict')
     localStorage.removeItem('meta')
+    localStorage.removeItem('dict')
     localStorage.removeItem('settings')
     localStorage.removeItem('user_data')
 
