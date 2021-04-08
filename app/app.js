@@ -594,7 +594,7 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
             <button id="solution-` + i + `" class="btn btn-info w-70"  data-toggle="collapse" href="#video-` + i + `" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
             <div id="word-` + i + `">
                 <br>
-                <h4 class="card-title font-weight-bold text-uppercase" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h4>
+                <h4 class="card-title font-weight-bold" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h4>
                 <hr>
                 <div class="row collapse" id="video-` + i + `">
                     <div class="col">
@@ -634,8 +634,9 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
         <button id="solution-` + i + `" class="btn btn-info"  data-toggle="collapse" href="#word-` + i + `" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
         <div class="collapse" id="word-` + i + `">
             <br>
-            <h4 class="card-title font-weight-bold text-uppercase" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h4>
+            <h4 class="card-title font-weight-bold" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h4>
             <br>
+            <hr>
             <div class="row">
                 <div class="col">
                     <button id="true-` + i + `" class="btn btn-outline-success w-100" data-toggle="button" aria-pressed="false"><i class="fas fa-check"></i></button>
