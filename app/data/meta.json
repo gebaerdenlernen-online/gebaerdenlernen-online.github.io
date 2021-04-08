@@ -48,5 +48,175 @@
     "Vergnügungspark",
     "Wegbeschreibung",
     "Zoo"
-  ]
+  ],
+  "exercises": {
+    "Basics": [
+      [
+        "ich",
+        "du",
+        "Mama",
+        "Papa",
+        "Oma",
+        "Opa",
+        "Onkel",
+        "Tante",
+        "Baby",
+        "Tochter",
+        "Kind",
+        "Familie"
+      ],
+
+      [
+        "Ja",
+        "Nein"
+      ],
+
+      [
+        "Hund",
+        "Katze",
+        "Vogel",
+        "Bär",
+        "Fuchs",
+        "Wal",
+        "Hase",
+        "Löwe",
+        "Raupe",
+        "Schmetterling"
+      ],
+
+      [
+        "Baum",
+        "Pflanze",
+        "Blume",
+        "Gras",
+        "Ast",
+        "Blatt",
+        "Stein"
+      ],
+
+      [
+        "Sonne",
+        "Wolken",
+        "Regen",
+        "Schnee"
+      ],
+
+      [
+        "Tag",
+        "Nacht",
+        "Licht",
+        "Dunkel",
+        "Lampe"
+      ],
+
+      [
+        "Auto",
+        "Bus",
+        "Zug"
+      ],
+
+      [
+        "Hose",
+        "T-Shirt",
+        "Schuhe",
+        "Socken",
+        "Mütze",
+        "Jacke"
+      ],
+
+      [
+        "essen",
+        "trinken",
+        "Brot",
+        "Kuchen",
+        "Wasser",
+        "Apfel",
+        "Banane",
+        "Birne",
+        "Gurke",
+        "Brokkoli",
+        "Möhre",
+        "Erdbeere"
+      ],
+
+      [
+        "schmeckt gut",
+        "hallo",
+        "tschüss"
+      ],
+
+      [
+        "Buch",
+        "Bausteine",
+        "Ball",
+        "Dose",
+        "Stern",
+        "Uhr",
+        "Kissen",
+        "Windel"
+      ],
+
+      [
+        "Schrank",
+        "Sessel",
+        "Sofa",
+        "Couch",
+        "Tisch",
+        "Stuhl",
+        "Spiegel",
+        "Fernseher",
+        "Regal",
+        "Bett",
+        "Toilette",
+        "Dusche",
+        "Waschbecken"
+      ],
+
+      [
+        "Haus",
+        "Türe",
+        "Treppe",
+        "Fenster",
+        "Wand",
+        "Decke",
+        "Boden"
+      ],
+
+      [
+        "Kinderzimmer",
+        "Büro",
+        "Schlafzimmer",
+        "Badezimmer",
+        "Küche",
+        "Flur",
+        "Garten"
+      ],
+
+      [
+        "See",
+        "Fluss",
+        "Meer",
+        "Landschaft",
+        "Berg",
+        "Wald",
+        "Feld",
+        "Park"
+      ],
+
+      [
+        "hungrig",
+        "glücklich",
+        "traurig",
+        "wütend",
+        "ängstlich"
+      ],
+
+      [
+        "laufen",
+        "stehen",
+        "gehen",
+        "sitzen"
+      ]
+    ]
+  }
 }

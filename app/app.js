@@ -66,7 +66,7 @@ if (user_data === null) {
             user_data = JSON.parse(xhr4.responseText);
             localStorage.setItem('user_data', xhr4.responseText);
 
-            init()
+            setExerciseToStack("Basics");
             initPracticeStacks()
         }
     };
@@ -74,7 +74,6 @@ if (user_data === null) {
     xhr4.send();
 } else {
     user_data = JSON.parse(user_data);
-    init()
     initPracticeStacks()
 }
 
@@ -102,24 +101,24 @@ if (window.location.pathname == "/app/dict/") {
 }
 
 // Setup practice mode can be removed if practicemode is integrated.
-for(var k=0; k<6; k++){
-    if (document.getElementById("btn-stack-sign-"+k) !== null) {
-        document.getElementById("btn-stack-sign-"+k).addEventListener("click", function () {
-            var i = parseInt(this.id.replace("btn-stack-sign-",""))
+for (var k = 0; k < 6; k++) {
+    if (document.getElementById("btn-stack-sign-" + k) !== null) {
+        document.getElementById("btn-stack-sign-" + k).addEventListener("click", function () {
+            var i = parseInt(this.id.replace("btn-stack-sign-", ""))
             vs = getPracticeSet(i);
-            showPracticeHTML(vs,0,true,i)
+            showPracticeHTML(vs, 0, true, i)
         });
     }
-    if (document.getElementById("btn-stack-word-"+k) !== null) {
-        document.getElementById("btn-stack-word-"+k).addEventListener("click", function () {
-            var i = parseInt(this.id.replace("btn-stack-word-",""))
+    if (document.getElementById("btn-stack-word-" + k) !== null) {
+        document.getElementById("btn-stack-word-" + k).addEventListener("click", function () {
+            var i = parseInt(this.id.replace("btn-stack-word-", ""))
             vs = getPracticeSet(i);
-            showPracticeHTML(vs,0,false,i)
+            showPracticeHTML(vs, 0, false, i)
         });
     }
 }
 
-if(window.location.pathname == "/app/dict/category/"){
+if (window.location.pathname == "/app/dict/category/") {
     document.getElementById("categories").innerHTML = createCategoriesHTML();
     addEventListenerPerCategory();
 }
@@ -147,7 +146,7 @@ function searchInDict(word, isExactMatch) {
     console.log("Search Word:", word)
     result = [];
 
-    if(dict == null){
+    if (dict == null) {
         return result
     }
 
@@ -317,7 +316,7 @@ function toggleWordAddButton(element, isToggeled) {
 
 function showSearchResult(id, word) {
     element = document.getElementById(id);
-    if(element !== null){
+    if (element !== null) {
         obj = searchInDict(word, false)
         html = searchResultHTML(word, obj)
         element.innerHTML = html
@@ -333,7 +332,7 @@ function showSearchResult(id, word) {
 
 
 function searchByCategory(category) {
-    console.log("Category:",category);
+    console.log("Category:", category);
     result = []
     for (var i = 0; i < dict.dict.length; i++) {
         for (var j = 0; j < dict.dict[i].category.length; j++) {
@@ -345,13 +344,13 @@ function searchByCategory(category) {
     return result
 }
 
-function createWordsPerCategoryHTML(category){
+function createWordsPerCategoryHTML(category) {
     html = ""
 
     obj = searchByCategory(category)
 
-    for(var i=0; i<obj.length; i++){
-        html += '<li class="list-group-item"><a href="/app/dict/#search='+encodeURI(obj[i].word.de)+'">'+obj[i].word.de+'</a></li>'
+    for (var i = 0; i < obj.length; i++) {
+        html += '<li class="list-group-item"><a href="/app/dict/#search=' + encodeURI(obj[i].word.de) + '">' + obj[i].word.de + '</a></li>'
     }
 
     return html
@@ -360,49 +359,49 @@ function createWordsPerCategoryHTML(category){
 function createCategoriesHTML() {
     html = ""
 
-    for(var i=0; i<meta.categories.length; i += 2){
+    for (var i = 0; i < meta.categories.length; i += 2) {
         html += `
         <div class="row">`
 
-        if(meta.categories[i] !== null){
+        if (meta.categories[i] !== null) {
             html += `
                 <div class="col-md">
                     <div class="card text-center">
                         <div class="card card-header">
                             <div class="row">
                                 <div class="col-9">
-                                    <h5>`+meta.categories[i]+`</h5>
+                                    <h5>` + meta.categories[i] + `</h5>
                                 </div>
                                 <div class="col-1">
-                                    <button class="btn btn-outline-success text-right" id="add-`+i+`" aria-toggle="true"><i class="fas fa-folder-plus"></i></button>
+                                    <button class="btn btn-outline-success text-right" id="add-` + i + `" aria-toggle="true"><i class="fas fa-folder-plus"></i></button>
                                 </div>
                             </div>
-                            <i class="fas fa-chevron-down" data-toggle="collapse" data-target="#category-`+i+`" aria-expanded="false" aria-controls="category-`+i+`"></i>
+                            <i class="fas fa-chevron-down" data-toggle="collapse" data-target="#category-` + i + `" aria-expanded="false" aria-controls="category-` + i + `"></i>
                         </div>
-                        <ul class="list-group collapse" id="category-`+i+`" style="max-height:200px;margin-bottom:10px;overflow:scroll;-webkit-overflow-scrolling: touch;">
-                            `+createWordsPerCategoryHTML(meta.categories[i])+`
+                        <ul class="list-group collapse" id="category-` + i + `" style="max-height:200px;margin-bottom:10px;overflow:scroll;-webkit-overflow-scrolling: touch;">
+                            ` + createWordsPerCategoryHTML(meta.categories[i]) + `
                         </ul>
                     </div>
                     <br>
                 </div>`
         }
-        if(meta.categories[i+1] !== null){
+        if (meta.categories[i + 1] !== null) {
             html += `
                 <div class="col-md">
                     <div class="card text-center">
                         <div class="card card-header">
                             <div class="row">
                                 <div class="col-9">
-                                    <h5>`+meta.categories[i+1]+`</h5>
+                                    <h5>` + meta.categories[i + 1] + `</h5>
                                 </div>
                                 <div class="col-1">
-                                    <button class="btn btn-outline-success text-right" id="add-`+(i+1)+`" aria-toggle="true"><i class="fas fa-folder-plus"></i></button>
+                                    <button class="btn btn-outline-success text-right" id="add-` + (i + 1) + `" aria-toggle="true"><i class="fas fa-folder-plus"></i></button>
                                 </div>
                             </div>
-                            <i class="fas fa-chevron-down" data-toggle="collapse" data-target="#category-`+(i+1)+`" aria-expanded="false" aria-controls="category-`+(i+1)+`"></i>
+                            <i class="fas fa-chevron-down" data-toggle="collapse" data-target="#category-` + (i + 1) + `" aria-expanded="false" aria-controls="category-` + (i + 1) + `"></i>
                         </div>
-                        <ul class="list-group collapse" id="category-`+(i+1)+`" style="max-height:200px;margin-bottom:10px;overflow:scroll;-webkit-overflow-scrolling: touch;">
-                            `+createWordsPerCategoryHTML(meta.categories[i+1])+`
+                        <ul class="list-group collapse" id="category-` + (i + 1) + `" style="max-height:200px;margin-bottom:10px;overflow:scroll;-webkit-overflow-scrolling: touch;">
+                            ` + createWordsPerCategoryHTML(meta.categories[i + 1]) + `
                         </ul>
                     </div>
                     <br>
@@ -416,33 +415,35 @@ function createCategoriesHTML() {
     return html
 }
 
-function addCategoryToStack(category){
+function addCategoryToStack(category) {
     obj = searchByCategory(category)
-    addToStack(obj,0)
+    addToStack(obj, 0)
     user_data.categories.push(category)
     saveUserData();
 }
 
-function removeCategoryFromStack(category){
+function removeCategoryFromStack(category) {
     obj = searchByCategory(category)
-    removeFromStack(obj,0)
-    user_data.categories.filter(function(obj){return obj !== category})
+    removeFromStack(obj, 0)
+    user_data.categories.filter(function (obj) {
+        return obj !== category
+    })
     saveUserData();
 }
 
-function isCategoryInUserData(category){
-    for(var i=0; i<user_data.categories.length;i++){
-        if(user_data.categories[i] == category){
+function isCategoryInUserData(category) {
+    for (var i = 0; i < user_data.categories.length; i++) {
+        if (user_data.categories[i] == category) {
             return true
         }
-    } 
+    }
     return false
 }
 
-function addEventListenerPerCategory(){
-    for(var i=0; i<meta.categories.length; i++){
-        toggleWordAddButton(document.getElementById("add-"+i),isCategoryInUserData(meta.categories[i]))
-        document.getElementById("add-"+i).addEventListener("click", function(event){
+function addEventListenerPerCategory() {
+    for (var i = 0; i < meta.categories.length; i++) {
+        toggleWordAddButton(document.getElementById("add-" + i), isCategoryInUserData(meta.categories[i]))
+        document.getElementById("add-" + i).addEventListener("click", function (event) {
             var element = this
             var entry = parseInt(this.id.replace("add-", ""))
 
@@ -540,31 +541,13 @@ function removeFromStack(obj, num) {
     }
 }
 
-function init() {
-    if (user_data.data[0].length === 0) {
-        addToStack(searchInDict('Vogel', true), 0);
-        addToStack(searchInDict('Baum', true), 0);
-        addToStack(searchInDict('Hund', true), 0);
-        addToStack(searchInDict('Katze', true), 0);
-        addToStack(searchInDict('Lampe', true), 0);
-        addToStack(searchInDict('Papa', true), 0);
-        addToStack(searchInDict('Mama', true), 0);
-        addToStack(searchInDict('Oma', true), 0);
-        addToStack(searchInDict('Opa', true), 0);
-        addToStack(searchInDict('Ich', true), 0);
-        addToStack(searchInDict('Du', true), 0);
-
-        saveUserData()
-    }
-}
-
 function getPracticeSet(num) {
-    console.log("Num",num);
+    console.log("Num", num);
 
     count = settings.number_of_words_per_session
     vocabulary_set = []
 
-    if(count > user_data.data[num].length){
+    if (count > user_data.data[num].length) {
         count = user_data.data[num].length
     }
 
@@ -590,13 +573,13 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
             categories += ", "
         }
     }
-    if(isSign){
+    if (isSign) {
         html += `
-        <div id="exercise-`+i+`" class="card text-center">
+        <div id="exercise-` + i + `" class="card text-center">
             <div class="card-header">
                 <h5>Wie lautet die Gebärde zu diesem Wort?</h5>
             </div>
-            <div class="card-img-top embed-responsive embed-responsive-4by3 collapse" id="video-`+i+`">
+            <div class="card-img-top embed-responsive embed-responsive-4by3 collapse" id="video-` + i + `">
                 <video class="embed-responsive-item" autoplay muted loop>
                     <source src="` + encodeURI(vocabulary_set[i].video.dgs[0].url) + `" type="video/mp4">
                     Your browser does not support the video tag.
@@ -610,17 +593,17 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
                 <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[0].license.url + `">` + vocabulary_set[i].video.dgs[0].license.name + `</a><br><br>
             </div>
             <button class="btn btn-outline-info text-left w-30" data-toggle="collapse" data-target="#info-` + i + `" aria-expanded="false" aria-controls="info-` + i + `"><i class="fab fa-creative-commons"></i></button>
-            <button id="solution-`+i+`" class="btn btn-info w-70"  data-toggle="collapse" href="#video-`+i+`" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
-            <div id="word-`+i+`">
+            <button id="solution-` + i + `" class="btn btn-info w-70"  data-toggle="collapse" href="#video-` + i + `" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
+            <div id="word-` + i + `">
                 <br>
                 <h4 class="card-title font-weight-bold text-uppercase" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h4>
                 <hr>
-                <div class="row collapse" id="video-`+i+`">
+                <div class="row collapse" id="video-` + i + `">
                     <div class="col">
-                        <button id="true-`+i+`" class="btn btn-outline-success w-100" data-toggle="button" aria-pressed="false"><i class="fas fa-check"></i></button>
+                        <button id="true-` + i + `" class="btn btn-outline-success w-100" data-toggle="button" aria-pressed="false"><i class="fas fa-check"></i></button>
                     </div>
                     <div class="col">
-                        <button id="false-`+i+`" class="btn btn-outline-danger w-100" data-toggle="button" aria-pressed="false"><i class="fas fa-times"></i></button>
+                        <button id="false-` + i + `" class="btn btn-outline-danger w-100" data-toggle="button" aria-pressed="false"><i class="fas fa-times"></i></button>
                     </div>
                 </div>
             </div>
@@ -632,11 +615,11 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
             <br>`;
     } else {
         html += `
-    <div id="exercise-`+i+`" class="card text-center">
+    <div id="exercise-` + i + `" class="card text-center">
         <div class="card-header">
             <h5>Wie lautet das Wort zu dieser Gebärde?</h5>
         </div>
-        <div class="card-img-top embed-responsive embed-responsive-4by3" id="video-`+i+`">
+        <div class="card-img-top embed-responsive embed-responsive-4by3" id="video-` + i + `">
             <video class="embed-responsive-item" autoplay muted loop>
                 <source src="` + encodeURI(vocabulary_set[i].video.dgs[0].url) + `" type="video/mp4">
                 Your browser does not support the video tag.
@@ -650,17 +633,17 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
             <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[0].license.url + `">` + vocabulary_set[i].video.dgs[0].license.name + `</a><br><br>
         </div>
         <button class="btn btn-outline-info text-left" data-toggle="collapse" data-target="#info-` + i + `" aria-expanded="false" aria-controls="info-` + i + `"><i class="fab fa-creative-commons"></i></button>
-        <button id="solution-`+i+`" class="btn btn-info"  data-toggle="collapse" href="#word-`+i+`" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
-        <div class="collapse" id="word-`+i+`">
+        <button id="solution-` + i + `" class="btn btn-info"  data-toggle="collapse" href="#word-` + i + `" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
+        <div class="collapse" id="word-` + i + `">
             <br>
             <h4 class="card-title font-weight-bold text-uppercase" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h4>
             <br>
             <div class="row">
                 <div class="col">
-                    <button id="true-`+i+`" class="btn btn-outline-success w-100" data-toggle="button" aria-pressed="false"><i class="fas fa-check"></i></button>
+                    <button id="true-` + i + `" class="btn btn-outline-success w-100" data-toggle="button" aria-pressed="false"><i class="fas fa-check"></i></button>
                 </div>
                 <div class="col">
-                    <button id="false-`+i+`" class="btn btn-outline-danger w-100" data-toggle="button" aria-pressed="false"><i class="fas fa-times"></i></button>
+                    <button id="false-` + i + `" class="btn btn-outline-danger w-100" data-toggle="button" aria-pressed="false"><i class="fas fa-times"></i></button>
                 </div>
             </div>
         </div>
@@ -675,32 +658,56 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
     return html;
 }
 
-function showPracticeHTML(vocabulary_set,i,isSign,stackNum) {
+function showPracticeHTML(vocabulary_set, i, isSign, stackNum) {
 
     if (document.getElementById("practice") !== null) {
-        if(vocabulary_set[i] === undefined){
+        if (vocabulary_set[i] === undefined) {
             window.location.href = "/app/"
             return
         }
 
         document.getElementById("practice").innerHTML = createPracticeHTML(vocabulary_set, i, isSign)
 
-        document.getElementById("true-"+i).setAttribute("data-stack",stackNum)
-        document.getElementById("true-"+i).addEventListener("click",function(event){
+        document.getElementById("true-" + i).setAttribute("data-stack", stackNum)
+        document.getElementById("true-" + i).addEventListener("click", function (event) {
             var stackNum = parseInt(this.getAttribute("data-stack"))
-            removeFromStack([vocabulary_set[i]],stackNum)
-            addToStack([vocabulary_set[i]],(stackNum+1>5)?5:stackNum+1)
+            removeFromStack([vocabulary_set[i]], stackNum)
+            addToStack([vocabulary_set[i]], (stackNum + 1 > 5) ? 5 : stackNum + 1)
             saveUserData()
-            showPracticeHTML(vocabulary_set,i+1,isSign,stackNum)
+            showPracticeHTML(vocabulary_set, i + 1, isSign, stackNum)
         })
-        document.getElementById("false-"+i).setAttribute("data-stack",stackNum)
-        document.getElementById("false-"+i).addEventListener("click",function(event){
+        document.getElementById("false-" + i).setAttribute("data-stack", stackNum)
+        document.getElementById("false-" + i).addEventListener("click", function (event) {
             var stackNum = parseInt(this.getAttribute("data-stack"))
-            removeFromStack([vocabulary_set[i]],stackNum)
-            addToStack([vocabulary_set[i]],stackNum)
+            removeFromStack([vocabulary_set[i]], stackNum)
+            addToStack([vocabulary_set[i]], stackNum)
             saveUserData()
-            showPracticeHTML(vocabulary_set,i+1,isSign,stackNum)
+            showPracticeHTML(vocabulary_set, i + 1, isSign, stackNum)
         })
+    }
+}
+
+////////////////////////////////////
+//                                //
+//           Exercise             //
+//                                //
+////////////////////////////////////
+
+function setExerciseToStack(exerciseName) {
+    var exercise = meta.exercises[exerciseName]
+    if (exercise == null) {
+        console.error("Exercise \"" + exerciseName + "\" not found!");
+        return
+    }
+    for(var i=0; i<exercise.length; i++){
+        for(var j=0; j<exercise[i].length; j++){
+            var word = searchInDict(exercise[i][j],true)
+            if(word == []){
+                console.warn("The word \""+exercise[i][j]+"\" was not found try alternative word or synonym.");
+                continue
+            }
+            addToStack(word,0)
+        }
     }
 }
 
@@ -711,29 +718,29 @@ function showPracticeHTML(vocabulary_set,i,isSign,stackNum) {
 //                                //
 ////////////////////////////////////
 
-if(window.location.pathname == "/app/settings/"){
+if (window.location.pathname == "/app/settings/") {
     document.getElementById("number_of_words_per_session").value = parseInt(settings.number_of_words_per_session)
 }
 
-function resetUserData(){
+function resetUserData() {
     localStorage.removeItem('user_data')
 
     window.location.href = "/app/settings/"
 }
 
-function resetDictionary(){
+function resetDictionary() {
     localStorage.removeItem('dict')
 
-    window.location.href = "/app/settings/"  
+    window.location.href = "/app/settings/"
 }
 
-function resetSettings(){
+function resetSettings() {
     localStorage.removeItem('settings')
 
     window.location.href = "/app/settings/"
 }
 
-function resetAll(){
+function resetAll() {
     localStorage.removeItem('dict')
     localStorage.removeItem('meta')
     localStorage.removeItem('settings')
@@ -742,7 +749,7 @@ function resetAll(){
     window.location.href = "/app/settings/"
 }
 
-function saveSettings(){
+function saveSettings() {
     settings.number_of_words_per_session = parseInt(document.getElementById("number_of_words_per_session").value);
     localStorage.setItem("settings", JSON.stringify(settings))
 }
@@ -751,14 +758,14 @@ function download(filename, text) {
     var element = document.createElement('a');
     element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename);
-  
+
     element.style.display = 'none';
     document.body.appendChild(element);
-  
+
     element.click();
-  
+
     document.body.removeChild(element);
-  }
+}
 
 ////////////////////////////////////
 //                                //
@@ -784,5 +791,5 @@ function sleep(ms) {
 
 function saveUserData() {
     localStorage.setItem("user_data", JSON.stringify(user_data))
-    console.log("Saved User Data:",user_data);
+    console.log("Saved User Data:", user_data);
 }
