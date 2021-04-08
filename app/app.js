@@ -239,7 +239,6 @@ function searchResultHTML(word, obj) {
                     </div>
                 </div>
                 </div>
-                <br>
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         `+html_videos+`
