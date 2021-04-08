@@ -181,36 +181,77 @@ function searchResultHTML(word, obj) {
             }
         }
 
+        html_videos=""
+        for(var v=0; v<obj[0].video.dgs.length; v++){
+            if(v==0){
+                html_videos += `
+                <div class="carousel-item active">
+                    <div class="card-img-top embed-responsive embed-responsive-4by3">
+                        <video class="embed-responsive-item" autoplay muted loop>
+                            <source src="` + encodeURI(obj[0].video.dgs[v].url) + `" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video> 
+                    </div>
+                    <div class="card-body">
+                        <div class=" text-left collapse mb-1 mt-1" id="info-` + 0+"-"+v + `">
+                            <b>Quelle:</b> ` + obj[0].video.dgs[v].source + `<br>
+                            <b>Datum:</b> ` + obj[0].video.dgs[v].created + `<br>
+                            <b>Kategorie:</b> ` + categories + `<br>
+                            <b>Lizenz:</b> <a href="` + obj[0].video.dgs[v].license.url + `">` + obj[0].video.dgs[v].license.name + `</a><br>
+                        </div>
+                        <button class="btn btn-outline-info w-100" data-toggle="collapse" data-target="#info-` + 0+"-"+v + `" aria-expanded="false" aria-controls="info-` + 0+"-"+v + `"><i class="fab fa-creative-commons"></i> Lizenz</button>
+                    </div>
+                </div>`
+                continue
+            }
+            html_videos += `
+            <div class="carousel-item">
+                <div class="card-img-top embed-responsive embed-responsive-4by3">
+                    <video class="embed-responsive-item" autoplay muted loop>
+                        <source src="` + encodeURI(obj[0].video.dgs[v].url) + `" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video> 
+                </div>
+                <div class="card-body">
+                    <div class=" text-left collapse mb-1 mt-1" id="info-` + 0+"-"+v + `">
+                        <b>Quelle:</b> ` + obj[0].video.dgs[v].source + `<br>
+                        <b>Datum:</b> ` + obj[0].video.dgs[v].created + `<br>
+                        <b>Kategorie:</b> ` + categories + `<br>
+                        <b>Lizenz:</b> <a href="` + obj[0].video.dgs[v].license.url + `">` + obj[0].video.dgs[v].license.name + `</a><br>
+                    </div>
+                    <button class="btn btn-outline-info w-100" data-toggle="collapse" data-target="#info-` + 0+"-"+v + `" aria-expanded="false" aria-controls="info-` + 0+"-"+v + `"><i class="fab fa-creative-commons"></i> Lizenz</button>
+                </div>
+            </div>
+            `
+        }
+
         html += `
             <h4>Bestes Ergebnis:</h4>
             <br>
             <div class="card text-center">
                 <div class="card-header">
-                    <h4 id="` + 0 + `">` + encodeHTMLEntities(obj[0].word.de) + `</h4>
+                <div class="row">
+                    <div class="col-10 col-lg-11">
+                        <h4 class="w-100" id="` + 0 + `">` + encodeHTMLEntities(obj[0].word.de) + `</h4>
+                    </div>
+                    <div class="col-1 col-lg-1">
+                        <button class="btn btn-outline-success text-right" id="add-` + 0 + `" aria-toggle="true"><i class="fas fa-folder-plus"></i></button>
+                    </div>
+                </div>
                 </div>
                 <br>
-                <div class="card-img-top embed-responsive embed-responsive-4by3">
-                    <video class="embed-responsive-item" autoplay muted loop>
-                        <source src="` + encodeURI(obj[0].video.dgs[0].url) + `" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video> 
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                        <button class="btn btn-outline-info text-left" data-toggle="collapse" data-target="#info-` + 0 + `" aria-expanded="false" aria-controls="info-0"><i class="fab fa-creative-commons"></i></button>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-outline-success text-right" id="add-` + 0 + `" aria-toggle="true"><i class="fas fa-folder-plus"></i></button>
-                        </div>
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        `+html_videos+`
                     </div>
-                    <div class="text-left collapse" id="info-0">
-                        <br>
-                        <b>Quelle:</b> ` + obj[0].video.dgs[0].source + `<br>
-                        <b>Datum:</b> ` + obj[0].video.dgs[0].created + `<br>
-                        <b>Kategorie:</b> ` + categories + `<br>
-                        <b>Lizenz:</b> <a href="` + obj[0].video.dgs[0].license.url + `">` + obj[0].video.dgs[0].license.name + `</a><br>
-                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
             </div>
             <br>
@@ -232,34 +273,74 @@ function searchResultHTML(word, obj) {
                 }
             }
 
+            html_videos=""
+            for(var v=0; v<obj[i].video.dgs.length; v++){
+                if(v==0){
+                    html_videos += `
+                    <div class="carousel-item active">
+                        <div class="card-img-top embed-responsive embed-responsive-4by3">
+                            <video class="embed-responsive-item" autoplay muted loop>
+                                <source src="` + encodeURI(obj[i].video.dgs[v].url) + `" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video> 
+                        </div>
+                        <div class="card-body">
+                            <div class=" text-left collapse mb-1 mt-1" id="info-` + i+"-"+v + `">
+                                <b>Quelle:</b> ` + obj[i].video.dgs[v].source + `<br>
+                                <b>Datum:</b> ` + obj[i].video.dgs[v].created + `<br>
+                                <b>Kategorie:</b> ` + categories + `<br>
+                                <b>Lizenz:</b> <a href="` + obj[i].video.dgs[v].license.url + `">` + obj[i].video.dgs[v].license.name + `</a><br>
+                            </div>
+                            <button class="btn btn-outline-info w-100" data-toggle="collapse" data-target="#info-` + i+"-"+v + `" aria-expanded="false" aria-controls="info-` + i+"-"+v + `"><i class="fab fa-creative-commons"></i> Lizenz</button>
+                        </div>
+                    </div>`
+                    continue
+                }
+                html_videos += `
+                    <div class="carousel-item">
+                        <div class="card-img-top embed-responsive embed-responsive-4by3">
+                            <video class="embed-responsive-item" autoplay muted loop>
+                                <source src="` + encodeURI(obj[i].video.dgs[v].url) + `" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video> 
+                        </div>
+                        <div class="card-body">
+                            <div class=" text-left collapse mb-1 mt-1" id="info-` + i+"-"+v + `">
+                                <b>Quelle:</b> ` + obj[i].video.dgs[v].source + `<br>
+                                <b>Datum:</b> ` + obj[i].video.dgs[v].created + `<br>
+                                <b>Kategorie:</b> ` + categories + `<br>
+                                <b>Lizenz:</b> <a href="` + obj[i].video.dgs[v].license.url + `">` + obj[i].video.dgs[v].license.name + `</a><br>
+                            </div>
+                            <button class="btn btn-outline-info w-100" data-toggle="collapse" data-target="#info-` + i+"-"+v + `" aria-expanded="false" aria-controls="info-` + i+"-"+v + `"><i class="fab fa-creative-commons"></i> Lizenz</button>
+                        </div>
+                    </div>
+                    `
+            }
+
             html += `<div class="card text-center">
             <div class="card-header" data-toggle="collapse" data-target="#video-` + i + `" aria-expanded="false" aria-controls="video-` + i + `">
-                <h4 id="` + i + `">` + encodeHTMLEntities(obj[i].word.de) + `</h4>
-            </div>
-            <div class="collapse" id="video-` + i + `">
-            <div class="card-img-top embed-responsive embed-responsive-4by3">
-                <video class="embed-responsive-item" autoplay muted loop>
-                    <source src="` + encodeURI(obj[i].video.dgs[0].url) + `" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div> 
-            <div class="card-body">
                 <div class="row">
-                    <div class="col">
-                        <button class="btn btn-outline-info text-left" data-toggle="collapse" data-target="#info-` + i + `" aria-expanded="false" aria-controls="info-` + i + `"><i class="fab fa-creative-commons"></i></button>
+                    <div class="col-10 col-lg-11">
+                        <h4 class="w-100" id="` + i + `">` + encodeHTMLEntities(obj[i].word.de) + `</h4>
                     </div>
-                    <div class="col">
+                    <div class="col-1 col-lg-1">
                         <button class="btn btn-outline-success text-right" id="add-` + i + `" aria-toggle="true"><i class="fas fa-folder-plus"></i></button>
                     </div>
                 </div>
-                    <br>
-                    <div class="collapse text-left" id="info-` + i + `">
-                        <b>Quelle:</b> ` + obj[i].video.dgs[0].source + `<br>
-                        <b>Datum:</b> ` + obj[i].video.dgs[0].created + `<br>
-                        <b>Kategorie:</b> ` + categories + `<br>
-                        <b>Lizenz:</b> <a href="` + obj[i].video.dgs[0].license.url + `">` + obj[i].video.dgs[0].license.name + `</a><br>
-                    </div>
+            </div>
+            <div class="collapse" id="video-` + i + `">
+            <div id="carouselExampleIndicators" class="carousel" data-ride="carousel slide">
+                <div class="carousel-inner">
+                    `+html_videos+`
                 </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
             </div>
             </div>
@@ -573,7 +654,7 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
     }
     if (isSign) {
         html += `
-        <div id="exercise-` + i + `" class="card text-center pt-5">
+        <div id="exercise-` + i + `" class="card text-center mt-4">
             <div class="card-header">
                 <h5>Wie lautet die Gebärde zu diesem Wort?</h5>
             </div>
@@ -613,7 +694,7 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
             <br>`;
     } else {
         html += `
-    <div id="exercise-` + i + `" class="card text-center pt-5">
+    <div id="exercise-` + i + `" class="card text-center mt-4">
         <div class="card-header">
             <h5>Wie lautet das Wort zu dieser Gebärde?</h5>
         </div>
