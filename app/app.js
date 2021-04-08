@@ -694,19 +694,21 @@ function showPracticeHTML(vocabulary_set, i, isSign, stackNum) {
 ////////////////////////////////////
 
 function setExerciseToStack(exerciseName) {
-    var exercise = meta.exercises[exerciseName]
-    if (exercise == null) {
-        console.error("Exercise \"" + exerciseName + "\" not found!");
-        return
-    }
-    for(var i=0; i<exercise.length; i++){
-        for(var j=0; j<exercise[i].length; j++){
-            var word = searchInDict(exercise[i][j],true)
-            if(word == []){
-                console.warn("The word \""+exercise[i][j]+"\" was not found try alternative word or synonym.");
-                continue
+    if(meta != null){
+        var exercise = meta.exercises[exerciseName]
+        if (exercise == null) {
+            console.error("Exercise \"" + exerciseName + "\" not found!");
+            return
+        }
+        for(var i=0; i<exercise.length; i++){
+            for(var j=0; j<exercise[i].length; j++){
+                var word = searchInDict(exercise[i][j],true)
+                if(word == []){
+                    console.warn("The word \""+exercise[i][j]+"\" was not found try alternative word or synonym.");
+                    continue
+                }
+                addToStack(word,0)
             }
-            addToStack(word,0)
         }
     }
 }
@@ -719,7 +721,9 @@ function setExerciseToStack(exerciseName) {
 ////////////////////////////////////
 
 if (window.location.pathname == "/app/settings/") {
-    document.getElementById("number_of_words_per_session").value = parseInt(settings.number_of_words_per_session)
+    if(settings != null){
+        document.getElementById("number_of_words_per_session").value = parseInt(settings.number_of_words_per_session)
+    }
 }
 
 function resetUserData() {
