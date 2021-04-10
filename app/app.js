@@ -10,13 +10,22 @@ if (dict === null) {
         if (this.readyState == 4 && this.status == 200) {
             // Typical action to be performed when the document is ready:
             dict = JSON.parse(xhr1.responseText);
-            localStorage.setItem('dict', xhr1.responseText);
+
+            // If the dict file is larger than 5MB this seems to have 
+            // problems for Chrome/Firefox as the qouta is 10MB
+            try{
+                localStorage.setItem('dict', xhr1.responseText);
+            } catch(exception){
+                console.error("Error: localStorage.setItem Failed.", exception);
+            }
+            
             if (document.getElementById("sign_count") !== null) {
                 document.getElementById('sign_count').innerText = dict.dict.length;
             }
         }
     };
-    xhr1.open('GET', '/app/data/dict-v2.json', true);
+    //xhr1.open('GET', '/app/data/dict-v2.json', true);
+    xhr1.open('GET', '/app/data/dummy-dict.json', false);
     xhr1.send();
 } else {
     dict = JSON.parse(dict);
@@ -239,15 +248,15 @@ function searchResultHTML(word, obj) {
                     </div>
                 </div>
                 </div>
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <div id="carouselExampleIndicators-`+0+`" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         `+html_videos+`
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators-`+0+`" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                     </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <a class="carousel-control-next" href="#carouselExampleIndicators-`+0+`" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
@@ -328,15 +337,15 @@ function searchResultHTML(word, obj) {
                 </div>
             </div>
             <div class="collapse" id="video-` + i + `">
-            <div id="carouselExampleIndicators" class="carousel" data-ride="carousel slide">
+            <div id="carouselExampleIndicators-`+i+`" class="carousel" data-ride="carousel slide">
                 <div class="carousel-inner">
                     `+html_videos+`
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <a class="carousel-control-prev" href="#carouselExampleIndicators-`+i+`" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                 </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <a class="carousel-control-next" href="#carouselExampleIndicators-`+i+`" role="button" data-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
@@ -357,6 +366,9 @@ function initWordAddButtons(obj) {
     for (var i = 0; i < obj.length; i++) {
         toggleWordAddButton(document.getElementById("add-" + i), isWordInStack(obj[i].word.de))
 
+        if(document.getElementById("add-" + i) == null){
+            break;
+        }
         document.getElementById("add-" + i).addEventListener("click", function (event) {
             var element = this
             var entry = obj[parseInt(this.id.replace("add-", ""))]
