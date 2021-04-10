@@ -16,7 +16,7 @@ if (dict === null) {
             try{
                 localStorage.setItem('dict', xhr1.responseText);
             } catch(exception){
-                console.error("Error: localStorage.setItem Failed.", exception);
+                console.error("Error: localStorage.setItem Failed. (Expected for dict.json > 5MB. Quota 10MB.\n", exception);
             }
             
             if (document.getElementById("sign_count") !== null) {
