@@ -663,26 +663,71 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
             categories += ", "
         }
     }
+    html_videos=""
+    for(var v=0; v<vocabulary_set[0].video.dgs.length; v++){
+        if(v==0){
+            html_videos += `
+            <div class="carousel-item active">
+                <div class="card-img-top embed-responsive embed-responsive-4by3">
+                    <video class="embed-responsive-item" autoplay muted loop>
+                        <source src="` + encodeURI(vocabulary_set[i].video.dgs[v].url) + `" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video> 
+                </div>
+                <div class="card-body">
+                    <div class=" text-left collapse mb-1 mt-1" id="info-` + i +"-"+ v + `">
+                        <b>Quelle:</b> ` + vocabulary_set[i].video.dgs[v].source + `<br>
+                        <b>Datum:</b> ` + vocabulary_set[i].video.dgs[v].created + `<br>
+                        <b>Kategorie:</b> ` + categories + `<br>
+                        <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[v].license.url + `">` + vocabulary_set[i].video.dgs[v].license.name + `</a><br>
+                    </div>
+                    <button class="btn btn-outline-info w-100" data-toggle="collapse" data-target="#info-` + i +"-"+ v + `" aria-expanded="false" aria-controls="info-` + i +"-"+ v + `"><i class="fab fa-creative-commons"></i> Lizenz</button>
+                </div>
+            </div>`
+            continue
+        }
+        html_videos += `
+        <div class="carousel-item">
+            <div class="card-img-top embed-responsive embed-responsive-4by3">
+                <video class="embed-responsive-item" autoplay muted loop>
+                    <source src="` + encodeURI(vocabulary_set[i].video.dgs[v].url) + `" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video> 
+            </div>
+            <div class="card-body">
+                <div class=" text-left collapse mb-1 mt-1" id="info-` + i +"-"+ v + `">
+                    <b>Quelle:</b> ` + vocabulary_set[i].video.dgs[v].source + `<br>
+                    <b>Datum:</b> ` + vocabulary_set[i].video.dgs[v].created + `<br>
+                    <b>Kategorie:</b> ` + categories + `<br>
+                    <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[v].license.url + `">` + vocabulary_set[i].video.dgs[v].license.name + `</a><br>
+                </div>
+                <button class="btn btn-outline-info w-100" data-toggle="collapse" data-target="#info-` + i+"-"+ v + `" aria-expanded="false" aria-controls="info-` + i +"-"+ v + `"><i class="fab fa-creative-commons"></i> Lizenz</button>
+            </div>
+        </div>
+        `
+    }
+
     if (isSign) {
         html += `
         <div id="exercise-` + i + `" class="card text-center mt-4">
             <div class="card-header">
                 <h5>Wie lautet die Gebärde zu diesem Wort?</h5>
             </div>
-            <div class="card-img-top embed-responsive embed-responsive-4by3 collapse" id="video-` + i + `">
-                <video class="embed-responsive-item" autoplay muted loop>
-                    <source src="` + encodeURI(vocabulary_set[i].video.dgs[0].url) + `" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>      
+            
+            <div id="video-`+i+`" class="carousel slide collapse" data-ride="carousel">
+            <div class="carousel-inner">
+                    `+html_videos+`
+                </div>
+                <a class="carousel-control-prev" href="#video-`+i+`" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#video-`+i+`" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-            <div class="card-body">
-            <div class="collapse text-left" id="info-` + i + `">
-                <b>Quelle:</b> ` + vocabulary_set[i].video.dgs[0].source + `<br>
-                <b>Datum:</b> ` + vocabulary_set[i].video.dgs[0].created + `<br>
-                <b>Kategorie:</b> ` + categories + `<br>
-                <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[0].license.url + `">` + vocabulary_set[i].video.dgs[0].license.name + `</a><br><br>
-            </div>
-            <button class="btn btn-outline-info text-left w-30" data-toggle="collapse" data-target="#info-` + i + `" aria-expanded="false" aria-controls="info-` + i + `"><i class="fab fa-creative-commons"></i></button>
+
             <button id="solution-` + i + `" class="btn btn-info w-70"  data-toggle="collapse" href="#video-` + i + `" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
             <div id="word-` + i + `">
                 <br>
@@ -709,25 +754,25 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
         <div class="card-header">
             <h5>Wie lautet das Wort zu dieser Gebärde?</h5>
         </div>
-        <div class="card-img-top embed-responsive embed-responsive-4by3" id="video-` + i + `">
-            <video class="embed-responsive-item" autoplay muted loop>
-                <source src="` + encodeURI(vocabulary_set[i].video.dgs[0].url) + `" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>      
+       
+        <div id="video-`+i+`" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+                `+html_videos+`
+            </div>
+            <a class="carousel-control-prev" href="#video-`+i+`" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#video-`+i+`" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
-        <div class="card-body">
-        <div class="collapse text-left" id="info-` + i + `">
-            <b>Quelle:</b> ` + vocabulary_set[i].video.dgs[0].source + `<br>
-            <b>Datum:</b> ` + vocabulary_set[i].video.dgs[0].created + `<br>
-            <b>Kategorie:</b> ` + categories + `<br>
-            <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[0].license.url + `">` + vocabulary_set[i].video.dgs[0].license.name + `</a><br><br>
-        </div>
-        <button class="btn btn-outline-info text-left" data-toggle="collapse" data-target="#info-` + i + `" aria-expanded="false" aria-controls="info-` + i + `"><i class="fab fa-creative-commons"></i></button>
+
         <button id="solution-` + i + `" class="btn btn-info"  data-toggle="collapse" href="#word-` + i + `" role="button" aria-expanded="false" aria-controls="collapseExample">Lösung anzeigen</button>
         <div class="collapse" id="word-` + i + `">
             <br>
             <h4 class="card-title font-weight-bold" id="word">` + encodeHTMLEntities(vocabulary_set[i].word.de) + `</h4>
-            <br>
             <hr>
             <div class="row">
                 <div class="col">
