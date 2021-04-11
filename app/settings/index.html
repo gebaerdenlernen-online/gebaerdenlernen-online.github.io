@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
         integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y= sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous">
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="/manifest.json">
 
     <title>Gebärden Lernen Online</title>
 </head>
@@ -68,16 +68,17 @@
 
         <h2 class="pt5">Eigenes Wörterbuch</h2>
         <p>
-            Wenn du dein eigenes Wörterbuch erstellt hast kannst du es hier in die Anwendung einfügen.
+            Wenn du dein eigenes Wörterbuch erstellt hast kannst du es hier in die Anwendung einfügen. 
+            Das aktuelle Wörterbuch kannst du <a href="javascript:download('gebaerden.online.dict.json',JSON.stringify(dict))">hier</a> runterladen.
         </p>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroupFileAddon01"><i class="fas fa-upload"></i></span>
+                <span class="input-group-text" id="inputGroupDictFileUpload"><i class="fas fa-upload"></i></span>
             </div>
             <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01"
-                    aria-describedby="inputGroupFileAddon01" disabled>
-                <label class="custom-file-label" for="inputGroupFile01">Wörterbuch Auswählen</label>
+                <input type="file" class="custom-file-input" id="dictFileUpload"
+                    aria-describedby="inputGroupDictFileUpload" accept=".json">
+                <label class="custom-file-label" for="dictFileUpload">Wörterbuch Auswählen</label>
             </div>
         </div>
 
@@ -94,12 +95,12 @@
         <h3>Backup Widerherstellen</h3>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroupFileAddon02"><i class="fas fa-upload"></i></span>
+                <span class="input-group-text" id="inputGroupBackupFileUpload"><i class="fas fa-upload"></i></span>
             </div>
             <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile02"
-                    aria-describedby="inputGroupFileAddon02" disabled>
-                <label class="custom-file-label" for="inputGroupFile02">Backup Auswählen</label>
+                <input type="file" class="custom-file-input" id="BackupFileUpload"
+                    aria-describedby="inputGroupBackupFileUpload" accept=".json">
+                <label class="custom-file-label" for="BackupFileUpload">Backup Auswählen</label>
             </div>
         </div>
 

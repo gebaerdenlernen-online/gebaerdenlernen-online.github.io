@@ -866,6 +866,44 @@ if (window.location.pathname == "/app/settings/") {
     if(settings != null){
         document.getElementById("number_of_words_per_session").value = parseInt(settings.number_of_words_per_session)
     }
+
+    uploadBackup = document.getElementById("BackupFileUpload")
+    if(uploadBackup != null){
+        uploadBackup.addEventListener("change",function(event){
+            let newUserData = this.files[0];
+            if(newUserData != null){
+                var reader = new FileReader();
+                reader.onload = function(event){
+                    var result = reader.result
+                    user_data = JSON.parse(result)
+                    localStorage.setItem("user_data",JSON.stringify(user_data))
+                }
+                reader.readAsText(newUserData)
+                
+            } else {
+                console.error("No files uploaded");
+            }
+        })
+    }
+
+    uploadDict = document.getElementById("dictFileUpload")
+    if(uploadDict != null){
+        uploadDict.addEventListener("change",function(event){
+            let newDict = this.files[0];
+            if(newDict != null){
+                var reader = new FileReader();
+                reader.onload = function(event){
+                    var result = reader.result
+                    dict = JSON.parse(result)
+                    localStorage.setItem("dict",JSON.stringify(dict))
+                }
+                reader.readAsText(newDict)
+                
+            } else {
+                console.error("No files uploaded");
+            }
+        })
+    }
 }
 
 function resetUserData() {
