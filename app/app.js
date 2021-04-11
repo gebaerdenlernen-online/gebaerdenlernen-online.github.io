@@ -713,7 +713,7 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
         html += `
         <div id="exercise-` + i + `" class="card text-center mt-4">
             <div class="card-header">
-                <h5>Wie lautet die Gebärde zu diesem Wort?</h5>
+                <h5>Welche Gebärde hat dieses Wort?</h5>
             </div>
             
             <div id="video-`+i+`" class="carousel slide collapse" data-ride="carousel">
