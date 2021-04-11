@@ -24,7 +24,9 @@ if (dict === null) {
             }
         }
     };
+
     xhr1.open('GET', '/app/data/dict-v2.json', true);
+    //xhr1.open('GET', '/app/data/merge-dict.json', true);
     //xhr1.open('GET', '/app/data/dummy-dict.json', false);
     xhr1.send();
 } else {
@@ -743,7 +745,7 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
                 </div>
             </div>
             </div>
-            <div class="card-footer text-muted">
+            <div class="card-footer text-muted text-center">
             ` + (i + 1) + `/` + vocabulary_set.length + `
             </div>
             </div>
@@ -784,7 +786,7 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
             </div>
         </div>
         </div>
-        <div class="card-footer text-muted">
+        <div class="card-footer text-muted text-center">
         ` + (i + 1) + `/` + vocabulary_set.length + `
         </div>
         </div>
