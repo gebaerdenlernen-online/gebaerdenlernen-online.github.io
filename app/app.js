@@ -205,12 +205,19 @@ function searchResultHTML(word, obj) {
                     </div>
                     <div class="card-body">
                         <div class=" text-left collapse mb-1 mt-1" id="info-` + 0+"-"+v + `">
-                            <b>Quelle:</b> ` + obj[0].video.dgs[v].source + `<br>
-                            <b>Datum:</b> ` + obj[0].video.dgs[v].created + `<br>
-                            <b>Kategorie:</b> ` + categories + `<br>
-                            <b>Lizenz:</b> <a href="` + obj[0].video.dgs[v].license.url + `">` + obj[0].video.dgs[v].license.name + `</a><br>
+                            <div class="row">
+                                <div class="col">
+                                    <b>Quelle:</b> ` + obj[0].video.dgs[v].source + `<br>
+                                    <b>Letzter Zugriff:</b> ` + obj[0].video.dgs[v].created + `<br>
+                                    <b>Kategorie:</b> ` + categories + `<br>
+                                    <b>Lizenz:</b> <a href="` + obj[0].video.dgs[v].license.url + `">` + obj[0].video.dgs[v].license.name + `</a><br>
+                                </div>
+                                <div class="col">
+                                    <button class="btn btn-danger"><i class="fas fa-bug"></i></button>
+                                </div>
+                            </div>
                         </div>
-                        <button class="btn btn-outline-info w-100" data-toggle="collapse" data-target="#info-` + 0+"-"+v + `" aria-expanded="false" aria-controls="info-` + 0+"-"+v + `"><i class="fab fa-creative-commons"></i> Lizenz</button>
+                        <button class="btn btn-outline-info w-100" data-toggle="collapse" data-target="#info-` + 0+"-"+v + `" aria-expanded="false" aria-controls="info-` + 0+"-"+v + `"><i class="fas fa-info-circle"></i> Details</button>
                     </div>
                 </div>`
                 continue
@@ -225,12 +232,19 @@ function searchResultHTML(word, obj) {
                 </div>
                 <div class="card-body">
                     <div class=" text-left collapse mb-1 mt-1" id="info-` + 0+"-"+v + `">
-                        <b>Quelle:</b> ` + obj[0].video.dgs[v].source + `<br>
-                        <b>Datum:</b> ` + obj[0].video.dgs[v].created + `<br>
-                        <b>Kategorie:</b> ` + categories + `<br>
-                        <b>Lizenz:</b> <a href="` + obj[0].video.dgs[v].license.url + `">` + obj[0].video.dgs[v].license.name + `</a><br>
+                        <div class="row">
+                            <div class="col">
+                                <b>Quelle:</b> ` + obj[0].video.dgs[v].source + `<br>
+                                <b>Letzter Zugriff:</b> ` + obj[0].video.dgs[v].created + `<br>
+                                <b>Kategorie:</b> ` + categories + `<br>
+                                <b>Lizenz:</b> <a href="` + obj[0].video.dgs[v].license.url + `">` + obj[0].video.dgs[v].license.name + `</a><br>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-danger"><i class="fas fa-bug"></i></button>
+                            </div>
+                        </div>
                     </div>
-                    <button class="btn btn-outline-info w-100" data-toggle="collapse" data-target="#info-` + 0+"-"+v + `" aria-expanded="false" aria-controls="info-` + 0+"-"+v + `"><i class="fab fa-creative-commons"></i> Lizenz</button>
+                    <button class="btn btn-outline-info w-100" data-toggle="collapse" data-target="#info-` + 0+"-"+v + `" aria-expanded="false" aria-controls="info-` + 0+"-"+v + `"><i class="fas fa-info-circle"></i> Details</button>
                 </div>
             </div>
             `
@@ -296,12 +310,19 @@ function searchResultHTML(word, obj) {
                         </div>
                         <div class="card-body">
                             <div class=" text-left collapse mb-1 mt-1" id="info-` + i+"-"+v + `">
-                                <b>Quelle:</b> ` + obj[i].video.dgs[v].source + `<br>
-                                <b>Datum:</b> ` + obj[i].video.dgs[v].created + `<br>
-                                <b>Kategorie:</b> ` + categories + `<br>
-                                <b>Lizenz:</b> <a href="` + obj[i].video.dgs[v].license.url + `">` + obj[i].video.dgs[v].license.name + `</a><br>
+                            <div class="row">
+                                <div class="col">
+                                    <b>Quelle:</b> ` + obj[i].video.dgs[v].source + `<br>
+                                    <b>Letzter Zugriff:</b> ` + obj[i].video.dgs[v].created + `<br>
+                                    <b>Kategorie:</b> ` + categories + `<br>
+                                    <b>Lizenz:</b> <a href="` + obj[i].video.dgs[v].license.url + `">` + obj[i].video.dgs[v].license.name + `</a><br>
+                                </div>
+                                <div class="col">
+                                    <button class="btn btn-danger"><i class="fas fa-bug"></i></button>
+                                </div>
                             </div>
-                            <button class="btn btn-outline-info w-100" data-toggle="collapse" data-target="#info-` + i+"-"+v + `" aria-expanded="false" aria-controls="info-` + i+"-"+v + `"><i class="fab fa-creative-commons"></i> Lizenz</button>
+                            </div>
+                            <button class="btn btn-outline-info w-100" data-toggle="collapse" data-target="#info-` + i+"-"+v + `" aria-expanded="false" aria-controls="info-` + i+"-"+v + `"><i class="fas fa-info-circle"></i> Details</button>
                         </div>
                     </div>`
                     continue
@@ -316,12 +337,19 @@ function searchResultHTML(word, obj) {
                         </div>
                         <div class="card-body">
                             <div class=" text-left collapse mb-1 mt-1" id="info-` + i+"-"+v + `">
-                                <b>Quelle:</b> ` + obj[i].video.dgs[v].source + `<br>
-                                <b>Datum:</b> ` + obj[i].video.dgs[v].created + `<br>
-                                <b>Kategorie:</b> ` + categories + `<br>
-                                <b>Lizenz:</b> <a href="` + obj[i].video.dgs[v].license.url + `">` + obj[i].video.dgs[v].license.name + `</a><br>
+                            <div class="row">
+                                <div class="col">
+                                    <b>Quelle:</b> ` + obj[i].video.dgs[v].source + `<br>
+                                    <b>Letzter Zugriff:</b> ` + obj[i].video.dgs[v].created + `<br>
+                                    <b>Kategorie:</b> ` + categories + `<br>
+                                    <b>Lizenz:</b> <a href="` + obj[i].video.dgs[v].license.url + `">` + obj[i].video.dgs[v].license.name + `</a><br>
+                                </div>
+                                <div class="col">
+                                    <button class="btn btn-danger"><i class="fas fa-bug"></i></button>
+                                </div>
                             </div>
-                            <button class="btn btn-outline-info w-100" data-toggle="collapse" data-target="#info-` + i+"-"+v + `" aria-expanded="false" aria-controls="info-` + i+"-"+v + `"><i class="fab fa-creative-commons"></i> Lizenz</button>
+                            </div>
+                            <button class="btn btn-outline-info w-100" data-toggle="collapse" data-target="#info-` + i+"-"+v + `" aria-expanded="false" aria-controls="info-` + i+"-"+v + `"><i class="fas fa-info-circle"></i> Details</button>
                         </div>
                     </div>
                     `
@@ -678,12 +706,19 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
                 </div>
                 <div class="card-body">
                     <div class=" text-left collapse mb-1 mt-1" id="info-` + i +"-"+ v + `">
-                        <b>Quelle:</b> ` + vocabulary_set[i].video.dgs[v].source + `<br>
-                        <b>Datum:</b> ` + vocabulary_set[i].video.dgs[v].created + `<br>
-                        <b>Kategorie:</b> ` + categories + `<br>
-                        <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[v].license.url + `">` + vocabulary_set[i].video.dgs[v].license.name + `</a><br>
+                    <div class="row">
+                        <div class="col">
+                            <b>Quelle:</b> ` + vocabulary_set[i].video.dgs[v].source + `<br>
+                            <b>Letzter Zugriff:</b> ` + vocabulary_set[i].video.dgs[v].created + `<br>
+                            <b>Kategorie:</b> ` + categories + `<br>
+                            <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[v].license.url + `">` + vocabulary_set[i].video.dgs[v].license.name + `</a><br>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-danger"><i class="fas fa-bug"></i></button>
+                        </div>
                     </div>
-                    <button class="btn btn-outline-info w-100" data-toggle="collapse" data-target="#info-` + i +"-"+ v + `" aria-expanded="false" aria-controls="info-` + i +"-"+ v + `"><i class="fab fa-creative-commons"></i> Lizenz</button>
+                    </div>
+                    <button class="btn btn-outline-info w-100" data-toggle="collapse" data-target="#info-` + i +"-"+ v + `" aria-expanded="false" aria-controls="info-` + i +"-"+ v + `"><i class="fas fa-info-circle"></i> Details</button>
                 </div>
             </div>`
             continue
@@ -698,12 +733,19 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
             </div>
             <div class="card-body">
                 <div class=" text-left collapse mb-1 mt-1" id="info-` + i +"-"+ v + `">
-                    <b>Quelle:</b> ` + vocabulary_set[i].video.dgs[v].source + `<br>
-                    <b>Datum:</b> ` + vocabulary_set[i].video.dgs[v].created + `<br>
-                    <b>Kategorie:</b> ` + categories + `<br>
-                    <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[v].license.url + `">` + vocabulary_set[i].video.dgs[v].license.name + `</a><br>
+                <div class="row">
+                    <div class="col">
+                        <b>Quelle:</b> ` + vocabulary_set[i].video.dgs[v].source + `<br>
+                        <b>Letzter Zugriff:</b> ` + vocabulary_set[i].video.dgs[v].created + `<br>
+                        <b>Kategorie:</b> ` + categories + `<br>
+                        <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[v].license.url + `">` + vocabulary_set[i].video.dgs[v].license.name + `</a><br>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-danger"><i class="fas fa-bug"></i></button>
+                    </div>
                 </div>
-                <button class="btn btn-outline-info w-100" data-toggle="collapse" data-target="#info-` + i+"-"+ v + `" aria-expanded="false" aria-controls="info-` + i +"-"+ v + `"><i class="fab fa-creative-commons"></i> Lizenz</button>
+                </div>
+                <button class="btn btn-outline-info w-100" data-toggle="collapse" data-target="#info-` + i+"-"+ v + `" aria-expanded="false" aria-controls="info-` + i +"-"+ v + `"><i class="fas fa-info-circle"></i> Details</button>
             </div>
         </div>
         `
