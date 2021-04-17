@@ -213,7 +213,7 @@ function searchResultHTML(word, obj) {
                                     <b>Lizenz:</b> <a href="` + obj[0].video.dgs[v].license.url + `">` + obj[0].video.dgs[v].license.name + `</a><br>
                                 </div>
                                 <div class="col">
-                                    <button class="btn btn-danger"><i class="fas fa-bug"></i></button>
+                                    <button class="btn btn-danger" onclick='download("`+obj[0].word.de+`.bug.json","`+JSON.stringify(obj[0]).replaceAll("\"","\\\"")+"Error Video: "+v+`")'><i class="fas fa-bug"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -240,7 +240,7 @@ function searchResultHTML(word, obj) {
                                 <b>Lizenz:</b> <a href="` + obj[0].video.dgs[v].license.url + `">` + obj[0].video.dgs[v].license.name + `</a><br>
                             </div>
                             <div class="col">
-                                <button class="btn btn-danger"><i class="fas fa-bug"></i></button>
+                                <button class="btn btn-danger" onclick='download("`+obj[0].word.de+`.bug.json","`+JSON.stringify(obj[0]).replaceAll("\"","\\\"")+"Error Video: "+v+`")'><i class="fas fa-bug"></i></button>
                             </div>
                         </div>
                     </div>
@@ -318,7 +318,7 @@ function searchResultHTML(word, obj) {
                                     <b>Lizenz:</b> <a href="` + obj[i].video.dgs[v].license.url + `">` + obj[i].video.dgs[v].license.name + `</a><br>
                                 </div>
                                 <div class="col">
-                                    <button class="btn btn-danger"><i class="fas fa-bug"></i></button>
+                                    <button class="btn btn-danger" onclick='download("`+obj[i].word.de+`.bug.json","`+JSON.stringify(obj[i]).replaceAll("\"","\\\"")+"Error Video: "+v+`")'><i class="fas fa-bug"></i></button>
                                 </div>
                             </div>
                             </div>
@@ -345,7 +345,7 @@ function searchResultHTML(word, obj) {
                                     <b>Lizenz:</b> <a href="` + obj[i].video.dgs[v].license.url + `">` + obj[i].video.dgs[v].license.name + `</a><br>
                                 </div>
                                 <div class="col">
-                                    <button class="btn btn-danger"><i class="fas fa-bug"></i></button>
+                                    <button class="btn btn-danger" onclick='download("`+obj[i].word.de+`.bug.json","`+JSON.stringify(obj[i]).replaceAll("\"","\\\"")+"Error Video: "+v+`")'><i class="fas fa-bug"></i></button>
                                 </div>
                             </div>
                             </div>
@@ -714,7 +714,7 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
                             <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[v].license.url + `">` + vocabulary_set[i].video.dgs[v].license.name + `</a><br>
                         </div>
                         <div class="col">
-                            <button class="btn btn-danger"><i class="fas fa-bug"></i></button>
+                            <button class="btn btn-danger" onclick='download("`+vocabulary_set[i].word.de+`.bug.json","`+JSON.stringify(vocabulary_set[i]).replaceAll("\"","\\\"")+"Error Video: "+v+`")'><i class="fas fa-bug"></i></button>
                         </div>
                     </div>
                     </div>
@@ -741,7 +741,7 @@ function createPracticeHTML(vocabulary_set, i, isSign) {
                         <b>Lizenz:</b> <a href="` + vocabulary_set[i].video.dgs[v].license.url + `">` + vocabulary_set[i].video.dgs[v].license.name + `</a><br>
                     </div>
                     <div class="col">
-                        <button class="btn btn-danger"><i class="fas fa-bug"></i></button>
+                        <button class="btn btn-danger" onclick='download("`+vocabulary_set[i].word.de+`.bug.json","`+JSON.stringify(vocabulary_set[i]).replaceAll("\"","\\\"")+"Error Video: "+v+`")'><i class="fas fa-bug"></i></button>
                     </div>
                 </div>
                 </div>
