@@ -66,7 +66,30 @@
         <br>
         <br>
 
-        <h2 class="pt5">Eigenes Wörterbuch</h2>
+        <h2 class="pt-5">Übungsmodus Stapelverarbeitung</h2>
+        <p>
+            Hier kann man Wörter in einem in den Übungsmodus auf Level 1 laden. Dabei kann man
+            auswählen ob man alle bisherigen Wörter ersetzen oder nur viele neue Wörter hinzufügen
+            will.
+        </p>
+        <p>
+            Es wird dabei immer ein Wort pro Zeile erwartet. Fehlt das Wort im Wörterbuch wird es 
+            oben als Fehler gemeldet und nicht hinzugefügt. Es wird geraten dann nach einem Synonym zu suchen.
+        </p>
+        <div id="alert-bulkEdit">
+
+        </div>
+        <textarea id="bulkEdit" cols="30" rows="10" class="input-group" placeholder="Eine Vokabel pro Zeile"></textarea>
+        <div class="row pt-3">
+            <div class="col">
+                <button class="btn btn-outline-danger w-100" onclick="replaceAllBulkEdit()">Alles Ersetzten</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-outline-success w-100" onclick="addBulkEdit()">Hinzufügen</button>
+            </div>
+        </div>
+
+        <h2 class="pt-5">Eigenes Wörterbuch</h2>
         <p>
             Wenn du dein eigenes Wörterbuch erstellt hast kannst du es hier in die Anwendung einfügen. 
             Das aktuelle Wörterbuch kannst du <a href="javascript:download('gebaerden.online.dict.json',JSON.stringify(dict))">hier</a> runterladen.

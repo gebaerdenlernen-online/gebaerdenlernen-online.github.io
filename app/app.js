@@ -993,6 +993,58 @@ function download(filename, text) {
     document.body.removeChild(element);
 }
 
+function replaceAllBulkEdit(){
+    // Empty set
+    for(var i=0;i<user_data.data.length;i++){
+        user_data.data[i] = []
+    }
+
+    addBulkEdit()
+}
+
+function addBulkEdit(){
+
+    textarea = document.getElementById("bulkEdit").value
+    wordArray = textarea.split("\n")
+    errorWords = []
+
+    for(var i=0; i<wordArray.length; i++){
+        var word = searchInDict(wordArray[i],true)
+        console.log("BulkEdit Word:",word);
+        if(word.length == 0){
+            console.warn("BulkEdit: The word \""+wordArray[i]+"\" was not found try alternative word or synonym.");
+            errorWords.push(wordArray[i])
+            continue
+        }
+        addToStack(word,0)
+    }
+
+    if(errorWords.length>0){
+        showErrorBulkEdit(errorWords)
+    }
+    
+    saveUserData()
+}
+
+function showErrorBulkEdit(wordList){
+    wordsHtml = ""
+    for(var i=0;i<wordList.length;i++){
+        wordsHtml += wordList[i]+"\n"
+    }
+
+    html = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Folgende Worte konnten nicht im Wörterbuch gefunden werden!</strong> 
+        <p>
+            `+wordsHtml+`
+        <p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>`
+
+  document.getElementById("alert-bulkEdit").innerHTML = html
+}
+
 ////////////////////////////////////
 //                                //
 //        Useful Functions        //
