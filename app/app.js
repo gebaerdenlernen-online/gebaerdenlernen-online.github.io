@@ -496,6 +496,7 @@ function createCategoriesHTML() {
                                     <button class="btn btn-outline-success text-right" id="add-` + i + `" aria-toggle="true"><i class="fas fa-folder-plus"></i></button>
                                 </div>
                             </div>
+                            <hr class="mt-3">
                             <i class="fas fa-chevron-down" data-toggle="collapse" data-target="#category-` + i + `" aria-expanded="false" aria-controls="category-` + i + `"></i>
                         </div>
                         <ul class="list-group collapse" id="category-` + i + `" style="max-height:200px;margin-bottom:10px;overflow:scroll;-webkit-overflow-scrolling: touch;">
@@ -518,6 +519,7 @@ function createCategoriesHTML() {
                                     <button class="btn btn-outline-success text-right" id="add-` + (i + 1) + `" aria-toggle="true"><i class="fas fa-folder-plus"></i></button>
                                 </div>
                             </div>
+                            <hr class="mt-3">
                             <i class="fas fa-chevron-down" data-toggle="collapse" data-target="#category-` + (i + 1) + `" aria-expanded="false" aria-controls="category-` + (i + 1) + `"></i>
                         </div>
                         <ul class="list-group collapse" id="category-` + (i + 1) + `" style="max-height:200px;margin-bottom:10px;overflow:scroll;-webkit-overflow-scrolling: touch;">
