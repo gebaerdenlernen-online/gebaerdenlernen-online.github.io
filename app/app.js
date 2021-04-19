@@ -489,7 +489,7 @@ function createCategoriesHTML() {
                     <div class="card text-center">
                         <div class="card card-header">
                             <div class="row">
-                                <div class="col-10 col-lg-11">
+                                <div class="col-10 col-lg-10">
                                     <h5>` + meta.categories[i] + `</h5>
                                 </div>
                                 <div class="col-1 col-lg-1">
@@ -511,7 +511,7 @@ function createCategoriesHTML() {
                     <div class="card text-center">
                         <div class="card card-header">
                             <div class="row">
-                                <div class="col-10 col-lg-11">
+                                <div class="col-10 col-lg-10">
                                     <h5>` + meta.categories[i + 1] + `</h5>
                                 </div>
                                 <div class="col-1 col-lg-1">
