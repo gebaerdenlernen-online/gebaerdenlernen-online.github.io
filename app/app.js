@@ -878,21 +878,26 @@ function showPracticeHTML(vocabulary_set, i, isSign, stackNum) {
 function setExerciseToStack(exerciseName) {
     console.log("Exercise Name:",exerciseName);
     if(meta != null){
-        var exercise = meta.exercises[exerciseName]
-        console.log("Exercise:",exercise);
-        if (exercise == null) {
-            console.error("Exercise \"" + exerciseName + "\" not found!");
-            return
-        }
-        for(var i=0; i<exercise.length; i++){
-            for(var j=0; j<exercise[i].length; j++){
-                var word = searchInDict(exercise[i][j],true)
-                console.log("Exercise Word:",word);
-                if(word.length == 0){
-                    console.warn("The word \""+exercise[i][j]+"\" was not found try alternative word or synonym.");
-                    continue
+        for(var i=0; i<meta.exercises.length; i++){
+                
+            var exercise = meta.exercises
+            console.log("Exercise:",exercise[i]);
+            if (exercise == null) {
+                console.error("Exercise \"" + exerciseName + "\" not found!");
+                continue
+            }
+
+            for(var j = 0; j < exercise[i].subexercises.length; j++){
+                console.log("Sub:",exercise[i].subexercises[j].name)
+                for(var k=0; k < exercise[i].subexercises[j].exercise.length; k++){
+                    var word = searchInDict(exercise[i].subexercises[j].exercise[k],true)
+                    console.log("Exercise Word:",exercise[i].subexercises[j].exercise[k]);
+                    if(word.length == 0){
+                        console.warn("The word \""+exercise[i].subexercises[j].exercise[k]+"\" was not found try alternative word or synonym.");
+                        continue
+                    }
+                    addToStack(word,0)
                 }
-                addToStack(word,0)
             }
         }
         saveUserData()

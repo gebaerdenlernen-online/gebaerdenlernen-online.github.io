@@ -49,172 +49,243 @@
     "Wegbeschreibung",
     "Zoo"
   ],
-  "exercises": {
-    "Basics": [
-      [
-        "ich",
-        "du",
-        "Mama",
-        "Papa",
-        "Oma",
-        "Opa",
-        "Onkel",
-        "Tante",
-        "Baby",
-        "Tochter",
-        "Kind",
-        "Familie"
-      ],
+  "exercises": [
+    {
+      "name": "Basics",
+      "description": "Ein erster Basis Wortschatz um Objekte und Handlungen zu erklären.",
+      "subexercises": [{
+          "name": "Familie",
+          "description": "",
+          "exercise": [
+            "ich",
+            "du",
+            "Mama",
+            "Papa",
+            "Oma",
+            "Opa",
+            "Onkel",
+            "Tante",
+            "Baby",
+            "Tochter",
+            "Kind",
+            "Familie"
+          ]
+        },
 
-      [
-        "Ja",
-        "Nein"
-      ],
+        {
+          "name": "Zustimmung",
+          "description": "",
+          "exercise": [
+            "Ja",
+            "Nein"
+          ]
+        },
 
-      [
-        "Hund",
-        "Katze",
-        "Vogel",
-        "Bär",
-        "Fuchs",
-        "Wal",
-        "Hase",
-        "Löwe",
-        "Raupe",
-        "Schmetterling"
-      ],
+        {
+          "name": "Tiere",
+          "description": "",
+          "exercise": [
+            "Hund",
+            "Katze",
+            "Vogel",
+            "Bär",
+            "Fuchs",
+            "Wal",
+            "Hase",
+            "Löwe",
+            "Raupe",
+            "Schmetterling"
+          ]
+        },
 
-      [
-        "Baum",
-        "Pflanze",
-        "Blume",
-        "Gras",
-        "Ast",
-        "Blatt",
-        "Stein"
-      ],
+        {
+          "name": "Pflanzen",
+          "description": "",
+          "exercise": [
+            "Baum",
+            "Pflanze",
+            "Blume",
+            "Gras",
+            "Ast",
+            "Blatt",
+            "Stein"
+          ]
+        },
 
-      [
-        "Sonne",
-        "Wolke",
-        "Regen",
-        "Schnee"
-      ],
+        {
+          "name": "Wetter",
+          "description": "",
+          "exercise": [
+            "Sonne",
+            "Wolke",
+            "Regen",
+            "Schnee"
+          ]
+        },
 
-      [
-        "Tag",
-        "Nacht",
-        "Licht",
-        "Dunkel",
-        "Lampe"
-      ],
+        {
+          "name": "Licht & Dunkel",
+          "description": "",
+          "exercise": [
+            "Tag",
+            "Nacht",
+            "Licht",
+            "Dunkel",
+            "Lampe"
+          ]
+        },
 
-      [
-        "Auto",
-        "Bus",
-        "Zug"
-      ],
+        {
+          "name": "Fahrzeuge",
+          "description": "",
+          "exercise": [
+            "Auto",
+            "Bus",
+            "Zug"
+          ]
+        },
 
-      [
-        "Hose",
-        "T-Shirt",
-        "Schuhe",
-        "Socke",
-        "Mütze",
-        "Jacke"
-      ],
+        {
+          "name": "Kleidung",
+          "description": "",
+          "exercise": [
+            "Hose",
+            "T-Shirt",
+            "Schuhe",
+            "Socke",
+            "Mütze",
+            "Jacke"
+          ]
+        },
 
-      [
-        "essen",
-        "trinken",
-        "Brot",
-        "Kuchen",
-        "Wasser",
-        "Apfel",
-        "Banane",
-        "Birne",
-        "Gurke",
-        "Brokkoli",
-        "Möhre",
-        "Erdbeere"
-      ],
+        {
+          "name": "Essen & Trinken",
+          "description": "",
+          "exercise": [
+            "essen",
+            "trinken",
+            "Brot",
+            "Kuchen",
+            "Wasser",
+            "Apfel",
+            "Banane",
+            "Birne",
+            "Gurke",
+            "Brokkoli",
+            "Möhre",
+            "Erdbeere"
+          ]
+        },
 
-      [
-        "schmeckt gut",
-        "hallo",
-        "tschüss"
-      ],
+        {
+          "name": "Ausdrücke",
+          "description": "",
+          "exercise": [
+            "schmeckt gut",
+            "hallo",
+            "tschüss"
+          ]
+        },
 
-      [
-        "Buch",
-        "Bausteine",
-        "Ball",
-        "Dose",
-        "Stern",
-        "Uhr",
-        "Kissen",
-        "Windel"
-      ],
+        {
+          "name": "Gegenstände",
+          "description": "",
+          "exercise": [
+            "Buch",
+            "Bausteine",
+            "Ball",
+            "Dose",
+            "Stern",
+            "Uhr",
+            "Kissen",
+            "Windel"
+          ]
+        },
 
-      [
-        "Schrank",
-        "Sessel",
-        "Sofa",
-        "Tisch",
-        "Stuhl",
-        "Spiegel",
-        "Fernseher",
-        "Regal",
-        "Bett",
-        "Toilette",
-        "Dusche",
-        "Waschbecken"
-      ],
+        {
+          "name": "Möbel",
+          "description": "",
+          "exercise": [
+            "Schrank",
+            "Sessel",
+            "Sofa",
+            "Tisch",
+            "Stuhl",
+            "Spiegel",
+            "Fernseher",
+            "Regal",
+            "Bett",
+            "Toilette",
+            "Dusche",
+            "Waschbecken"
+          ]
+        },
 
-      [
-        "Haus",
-        "Tür",
-        "Treppe",
-        "Fenster",
-        "Wand",
-        "Decke",
-        "Fußboden"
-      ],
+        {
+          "name": "Im Haus",
+          "description": "",
+          "exercise": [
+            "Haus",
+            "Tür",
+            "Treppe",
+            "Fenster",
+            "Wand",
+            "Decke",
+            "Fußboden"
+          ]
+        },
 
-      [
-        "Kinderzimmer",
-        "Büro",
-        "Schlafzimmer",
-        "Badezimmer",
-        "Küche",
-        "Flur",
-        "Garten"
-      ],
+        {
+          "name": "Räume",
+          "description": "",
+          "exercise": [
+            "Kinderzimmer",
+            "Büro",
+            "Schlafzimmer",
+            "Badezimmer",
+            "Küche",
+            "Flur",
+            "Garten"
+          ]
+        },
 
-      [
-        "See",
-        "Fluss",
-        "Meer",
-        "Landschaft",
-        "Berge",
-        "Wald",
-        "Feld",
-        "Park"
-      ],
+        {
+          "name": "Draußen",
+          "description": "",
+          "exercise": [
+            "See",
+            "Fluss",
+            "Meer",
+            "Landschaft",
+            "Berge",
+            "Wald",
+            "Feld",
+            "Park"
+          ]
+        },
 
-      [
-        "Hunger",
-        "glücklich",
-        "traurig",
-        "Wut",
-        "Angst"
-      ],
+        {
+          "name": "Gefühle",
+          "description": "",
+          "exercise": [
+            "Hunger",
+            "glücklich",
+            "traurig",
+            "Wut",
+            "Angst"
+          ]
+        },
 
-      [
-        "laufen",
-        "stehen",
-        "sitzen"
+        {
+          "name": "Bewegung",
+          "description": "",
+          "exercise": [
+            "laufen",
+            "stehen",
+            "sitzen"
+          ]
+        }
       ]
-    ]
-  }
+    }
+  ]
 }
