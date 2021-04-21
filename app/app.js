@@ -72,6 +72,7 @@ if (user_data === null) {
             localStorage.setItem('user_data', xhr4.responseText);
 
             setExerciseToStack("Basics");
+            showExerciseHTML()
             initPracticeStacks()
         }
     };
@@ -79,9 +80,10 @@ if (user_data === null) {
     xhr4.send();
 } else {
     user_data = JSON.parse(user_data);
-    if(user_data.data[0].length == 0)[
+    if(user_data.data[0].length == 0){
         setExerciseToStack("Basics")
-    ]
+    }
+    showExerciseHTML()
     initPracticeStacks()
 }
 
@@ -901,6 +903,120 @@ function setExerciseToStack(exerciseName) {
             }
         }
         saveUserData()
+    }
+}
+
+function showExerciseHTML(){
+    html = `
+    <div id="exercise-1">
+        <h2 class="pt-3">Übung 1</h2>
+        <p>
+            Ein wenig Text um die Übung zu beschreiben.
+        </p>
+        <div class="row">
+            <div class="col-md">
+                <div class="card text-center">
+                    <div class="card card-header">
+                        <div class="row">
+                            <div class="col-6 col-lg-6">
+                                <h5>Übung A</h5>
+                            </div>
+                            <div class="col-2 col-lg-2">
+                                <button class="btn btn-outline-success text-right" id="add-" aria-toggle="true"><i class="fas fa-american-sign-language-interpreting"></i></button>
+                            </div>
+                            <div class="col-2 col-lg-2">
+                                <button class="btn btn-outline-success text-right" id="add-" aria-toggle="true"><i class="fas fa-font"></i></button>
+                            </div>
+                            <div class="col-2 col-lg-2">
+                                <button class="btn btn-outline-success text-right" id="add-" aria-toggle="true"><i class="fas fa-folder-plus"></i></button>
+                            </div>
+                        </div>
+                        <p class="mt-4">
+                            Text um die Unterübung zu beschreiben.
+                        </p>
+                        <hr class="mt-3">
+                        <i class="fas fa-chevron-down" data-toggle="collapse" data-target="#category-" aria-expanded="false" aria-controls="category-"></i>
+                    </div>
+                    <ul class="list-group collapse" id="category-" style="max-height:200px;margin-bottom:10px;overflow:scroll;-webkit-overflow-scrolling: touch;">
+                        <li class="list-group-item"><a href="/app/dict/#search=WORT">WORT 1</a></li>
+                        <li class="list-group-item"><a href="/app/dict/#search=WORT">WORT 2</a></li>
+                        <li class="list-group-item"><a href="/app/dict/#search=WORT">WORT 3</a></li>
+                    </ul>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+    `
+    var exerciseMode = document.getElementById("exercise")
+    if(exerciseMode != null){
+        if(meta != null){
+            html = ""
+            console.log("Create exercises");
+            for(var i=0; i<meta.exercises.length; i++){
+                exercisesHTML = `
+                <div id="exercise-`+i+`">
+                    <h2 class="pt-3">`+meta.exercises[i].name+`</h2>
+                    <p>
+                        `+meta.exercises[i].description+`
+                    </p>
+                        
+                `
+                for(var j=0; j<meta.exercises[i].subexercises.length; j++){
+                    subexercisesHTML = `
+                    <div class="">
+                            <div class="card text-center">
+                                <div class="card card-header">
+                                    <div class="row">
+                                        <div class="col-6 col-lg-6">
+                                            <h5>`+meta.exercises[i].subexercises[j].name+`</h5>
+                                        </div>
+                                        <div class="col-2 col-lg-2">
+                                            <button class="btn btn-outline-success text-right" id="add-`+i+"-"+j+`" aria-toggle="true"><i class="fas fa-american-sign-language-interpreting"></i></button>
+                                        </div>
+                                        <div class="col-2 col-lg-2">
+                                            <button class="btn btn-outline-success text-right" id="add-`+i+"-"+j+`" aria-toggle="true"><i class="fas fa-font"></i></button>
+                                        </div>
+                                        <div class="col-2 col-lg-2">
+                                            <button class="btn btn-outline-success text-right" id="add-`+i+"-"+j+`" aria-toggle="true"><i class="fas fa-folder-plus"></i></button>
+                                        </div>
+                                    </div>
+                                    <p class="mt-4">
+                                        `+meta.exercises[i].subexercises[j].description+`
+                                    </p>
+                                    <hr class="mt-3">
+                                    <i class="fas fa-chevron-down" data-toggle="collapse" data-target="#category-`+i+"-"+j+`" aria-expanded="false" aria-controls="category-"></i>
+                                </div>    
+                                <ul class="list-group collapse" id="category-`+i+"-"+j+`" style="max-height:200px;margin-bottom:10px;overflow:scroll;-webkit-overflow-scrolling: touch;">                
+                    `
+
+                    exerciseHTML = ""
+                    for(var k=0; k<meta.exercises[i].subexercises[j].exercise.length; k++){
+                        exerciseHTML += `
+                            <li class="list-group-item"><a href="/app/dict/#search=`+encodeURI(meta.exercises[i].subexercises[j].exercise[k])+`">`+meta.exercises[i].subexercises[j].exercise[k]+`</a></li>
+                        `
+
+                    }
+
+                    subexercisesHTML += exerciseHTML
+
+                    exercisesHTML += subexercisesHTML
+
+                    exercisesHTML += `
+                            </ul>
+                        </div>
+                        <br>
+                    </div>
+                    `
+                }
+
+                exercisesHTML += `
+                </div>
+                `
+                html += exercisesHTML
+            }
+        }
+        exerciseMode.innerHTML = html;
     }
 }
 
