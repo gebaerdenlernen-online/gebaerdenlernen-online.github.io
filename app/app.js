@@ -256,7 +256,7 @@ function searchResultHTML(word, obj) {
         }
 
         html += `
-            <h4>Bestes Ergebnis:</h4>
+            <h4 id="`+ encodeURI(word)+`">Bestes Ergebnis:</h4>
             <br>
             <div class="card text-center">
                 <div class="card-header">
@@ -446,6 +446,10 @@ function showSearchResult(id, word) {
         html = searchResultHTML(word, obj)
         element.innerHTML = html
         initWordAddButtons(obj)
+
+        document.getElementById(word).scrollIntoView({
+            behavior: 'smooth'
+        });
     }
 }
 
