@@ -846,26 +846,34 @@ function showPracticeHTML(vocabulary_set, i, isSign, stackNum) {
 
     if (document.getElementById("practice") !== null) {
         if (vocabulary_set[i] === undefined) {
-            window.location.href = "/app/"
+            window.location.href = window.location.href
             return
         }
+
+        console.warn(vocabulary_set);
 
         document.getElementById("practice").innerHTML = createPracticeHTML(vocabulary_set, i, isSign)
 
         document.getElementById("true-" + i).setAttribute("data-stack", stackNum)
         document.getElementById("true-" + i).addEventListener("click", function (event) {
             var stackNum = parseInt(this.getAttribute("data-stack"))
-            removeFromStack([vocabulary_set[i]], stackNum)
-            addToStack([vocabulary_set[i]], (stackNum + 1 > 5) ? 5 : stackNum + 1)
-            saveUserData()
+            
+            if(stackNum >= 0){
+                removeFromStack([vocabulary_set[i]], stackNum)
+                addToStack([vocabulary_set[i]], (stackNum + 1 > 5) ? 5 : stackNum + 1)
+                saveUserData()
+            }
             showPracticeHTML(vocabulary_set, i + 1, isSign, stackNum)
         })
         document.getElementById("false-" + i).setAttribute("data-stack", stackNum)
         document.getElementById("false-" + i).addEventListener("click", function (event) {
             var stackNum = parseInt(this.getAttribute("data-stack"))
-            removeFromStack([vocabulary_set[i]], stackNum)
-            addToStack([vocabulary_set[i]], 0)
-            saveUserData()
+            
+            if(stackNum >= 0){
+                removeFromStack([vocabulary_set[i]], stackNum)
+                addToStack([vocabulary_set[i]], 0)
+                saveUserData()
+            }
             showPracticeHTML(vocabulary_set, i + 1, isSign, stackNum)
         })
     }
@@ -907,47 +915,6 @@ function setExerciseToStack(exerciseName) {
 }
 
 function showExerciseHTML(){
-    html = `
-    <div id="exercise-1">
-        <h2 class="pt-3">Übung 1</h2>
-        <p>
-            Ein wenig Text um die Übung zu beschreiben.
-        </p>
-        <div class="row">
-            <div class="col-md">
-                <div class="card text-center">
-                    <div class="card card-header">
-                        <div class="row">
-                            <div class="col-6 col-lg-6">
-                                <h5>Übung A</h5>
-                            </div>
-                            <div class="col-2 col-lg-2">
-                                <button class="btn btn-outline-success text-right" id="add-" aria-toggle="true"><i class="fas fa-american-sign-language-interpreting"></i></button>
-                            </div>
-                            <div class="col-2 col-lg-2">
-                                <button class="btn btn-outline-success text-right" id="add-" aria-toggle="true"><i class="fas fa-font"></i></button>
-                            </div>
-                            <div class="col-2 col-lg-2">
-                                <button class="btn btn-outline-success text-right" id="add-" aria-toggle="true"><i class="fas fa-folder-plus"></i></button>
-                            </div>
-                        </div>
-                        <p class="mt-4">
-                            Text um die Unterübung zu beschreiben.
-                        </p>
-                        <hr class="mt-3">
-                        <i class="fas fa-chevron-down" data-toggle="collapse" data-target="#category-" aria-expanded="false" aria-controls="category-"></i>
-                    </div>
-                    <ul class="list-group collapse" id="category-" style="max-height:200px;margin-bottom:10px;overflow:scroll;-webkit-overflow-scrolling: touch;">
-                        <li class="list-group-item"><a href="/app/dict/#search=WORT">WORT 1</a></li>
-                        <li class="list-group-item"><a href="/app/dict/#search=WORT">WORT 2</a></li>
-                        <li class="list-group-item"><a href="/app/dict/#search=WORT">WORT 3</a></li>
-                    </ul>
-                </div>
-                <br>
-            </div>
-        </div>
-    </div>
-    `
     var exerciseMode = document.getElementById("exercise")
     if(exerciseMode != null){
         if(meta != null){
@@ -956,10 +923,11 @@ function showExerciseHTML(){
             for(var i=0; i<meta.exercises.length; i++){
                 exercisesHTML = `
                 <div id="exercise-`+i+`">
-                    <h2 class="pt-3">`+meta.exercises[i].name+`</h2>
+                    <h2 class="pt-3"  data-toggle="collapse" data-target="#subexercises-`+i+`" aria-expanded="false" aria-controls="category-">`+meta.exercises[i].name+` <i class="fas fa-chevron-down"></i></h2>
                     <p>
                         `+meta.exercises[i].description+`
                     </p>
+                    <div id="subexercises-`+i+`" class="collapse show">
                         
                 `
                 for(var j=0; j<meta.exercises[i].subexercises.length; j++){
@@ -972,13 +940,13 @@ function showExerciseHTML(){
                                             <h5>`+meta.exercises[i].subexercises[j].name+`</h5>
                                         </div>
                                         <div class="col-2 col-lg-2">
-                                            <button class="btn btn-outline-success text-right" id="add-`+i+"-"+j+`" aria-toggle="true"><i class="fas fa-american-sign-language-interpreting"></i></button>
+                                            <button class="btn btn-outline-success text-right" id="sign-`+i+"-"+j+`" onclick="showPracticeHTML(createVocabularySet(meta.exercises[`+i+`].subexercises[`+j+`].exercise),0,true,-1)" aria-toggle="true"><i class="fas fa-american-sign-language-interpreting"></i></button>
                                         </div>
                                         <div class="col-2 col-lg-2">
-                                            <button class="btn btn-outline-success text-right" id="add-`+i+"-"+j+`" aria-toggle="true"><i class="fas fa-font"></i></button>
+                                            <button class="btn btn-outline-success text-right" id="word-`+i+"-"+j+`" onclick="showPracticeHTML(createVocabularySet(meta.exercises[`+i+`].subexercises[`+j+`].exercise),0,false,-1)" aria-toggle="true"><i class="fas fa-font"></i></button>
                                         </div>
                                         <div class="col-2 col-lg-2">
-                                            <button class="btn btn-outline-success text-right" id="add-`+i+"-"+j+`" aria-toggle="true"><i class="fas fa-folder-plus"></i></button>
+                                            <button disabled class="btn btn-outline-success text-right" id="add-`+i+"-"+j+`" aria-toggle="true"><i class="fas fa-folder-plus"></i></button>
                                         </div>
                                     </div>
                                     <p class="mt-4">
@@ -1011,6 +979,7 @@ function showExerciseHTML(){
                 }
 
                 exercisesHTML += `
+                    </div>
                 </div>
                 `
                 html += exercisesHTML
@@ -1018,6 +987,14 @@ function showExerciseHTML(){
         }
         exerciseMode.innerHTML = html;
     }
+}
+
+function createVocabularySet(wordList){
+    vocabulary_set = []
+    for(var i=0; i<wordList.length; i++){
+        vocabulary_set.push(searchInDict(wordList[i],true)[0])
+    }
+    return vocabulary_set
 }
 
 
