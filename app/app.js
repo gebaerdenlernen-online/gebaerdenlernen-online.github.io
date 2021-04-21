@@ -161,6 +161,9 @@ function searchInDict(word, isExactMatch) {
         return result
     }
 
+    // remove trailing spaces on end.
+    word = word.trim()
+
     for (var i = 0; i < dict.dict.length; i++) {
         if (dict.dict[i].word.de.toLowerCase() === word.toLowerCase()) {
             result.push(dict.dict[i])
