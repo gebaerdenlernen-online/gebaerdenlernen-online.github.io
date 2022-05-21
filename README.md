@@ -20,7 +20,7 @@ Alle Inhalte müssen unter [CC BY-NC-SA 3.0 DE](https://creativecommons.org/lice
 
 ## Warum dieses Projekt?
 
-> Die meisten Materialien online fand sahen sehr alt aus oder waren Kostenpflichtig. Wir haben vor kurzem erfahren das unser Sohn (9 Monate) nicht hören kann und damit keine Zeit vergeht bis wir einen Hausgeärdensprachkurs bekommen können, besonders unter Corona Bedingungen habe ich angefangen für uns diese kleinen Anwendung zu bauen.
+> Die meisten Materialien online sahen sehr alt aus oder waren kostenpflichtig. Wir haben vor kurzem erfahren, dass unser Sohn (9 Monate) nicht hören kann. Damit keine Zeit vergeht bis wir einen Hausgeärdensprachkurs bekommen können, besonders unter Corona Bedingungen, habe ich angefangen für uns diese kleinen Anwendung zu bauen.
 > Außerdem möchte ich, dass möglichst viele Menschen einfach zu dem Projekt beitragen können.
 > - Tim (03.04.2021)
 
